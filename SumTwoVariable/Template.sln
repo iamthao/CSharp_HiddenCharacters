@@ -5,6 +5,8 @@ VisualStudioVersion = 12.0.30501.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TemplateReplaceData", "SumTwoVariable\TemplateReplaceData.csproj", "{EC9C5239-8492-412B-A471-16B9694C0140}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GanData", "GanData\GanData.csproj", "{C59022EB-39CF-4F11-8689-176D76B61CE5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{EC9C5239-8492-412B-A471-16B9694C0140}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EC9C5239-8492-412B-A471-16B9694C0140}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EC9C5239-8492-412B-A471-16B9694C0140}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C59022EB-39CF-4F11-8689-176D76B61CE5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C59022EB-39CF-4F11-8689-176D76B61CE5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C59022EB-39CF-4F11-8689-176D76B61CE5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C59022EB-39CF-4F11-8689-176D76B61CE5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
