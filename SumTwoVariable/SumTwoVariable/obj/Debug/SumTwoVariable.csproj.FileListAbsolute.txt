@@ -1,6 +1,0 @@
-D:\GithubSvn\TestCommitGithub\SumTwoVariable\SumTwoVariable\bin\Debug\SumTwoVariable.exe.config
-D:\GithubSvn\TestCommitGithub\SumTwoVariable\SumTwoVariable\bin\Debug\SumTwoVariable.exe
-D:\GithubSvn\TestCommitGithub\SumTwoVariable\SumTwoVariable\bin\Debug\SumTwoVariable.pdb
-D:\GithubSvn\TestCommitGithub\SumTwoVariable\SumTwoVariable\obj\Debug\SumTwoVariable.csprojResolveAssemblyReference.cache
-D:\GithubSvn\TestCommitGithub\SumTwoVariable\SumTwoVariable\obj\Debug\SumTwoVariable.exe
-D:\GithubSvn\TestCommitGithub\SumTwoVariable\SumTwoVariable\obj\Debug\SumTwoVariable.pdb
