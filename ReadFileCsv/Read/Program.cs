@@ -11,7 +11,7 @@ namespace Read
     {
         static void Main(string[] args)
         {
-            ReadCsv.ReadFileCsv("D:\\TestCsv.csv");
+            //ReadCsv.ReadFileCsv("D:\\TestCsv.csv");
             Console.ReadLine();
         }
     }
