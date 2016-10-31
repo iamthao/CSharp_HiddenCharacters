@@ -17,7 +17,7 @@ namespace SumTwoVariable
                 my_name = "Thao"
             };
 
-            var text = "This is my {{name}}\nMy name is {{my_name}}";
+            var text = "This is my <strong>{{name}}</strong>\nMy name is {{my_name}}";
             var data = (object) value;
 
             var content = FormatTemplateWithContentTemplate(System.Net.WebUtility.HtmlDecode(text), data);           
