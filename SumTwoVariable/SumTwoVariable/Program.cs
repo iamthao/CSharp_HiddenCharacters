@@ -10,7 +10,7 @@ namespace SumTwoVariable
     {
         static void Main(string[] args)
         {
-            Console.WriteLine(1+1);
+            Console.WriteLine(15+6);
             Console.ReadLine();
         }
     }
