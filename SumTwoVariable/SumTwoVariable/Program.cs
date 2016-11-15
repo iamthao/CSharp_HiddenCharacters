@@ -14,11 +14,16 @@ namespace SumTwoVariable
             PrameterData value = new PrameterData
             {
                 name = "car",
+         
+            };
+
+            PrameterData1 value1 = new PrameterData1
+            {
                 my_name = "Thao"
             };
 
             var text = "This is my <strong>{{name}}</strong>\nMy name is {{my_name}}";
-            var data = (object) value;
+            var data = (dynamic)value + (object)value1;
 
             var content = FormatTemplateWithContentTemplate(System.Net.WebUtility.HtmlDecode(text), data);           
             Console.WriteLine(content);
@@ -28,7 +33,12 @@ namespace SumTwoVariable
         public class PrameterData
         {
             public string name { get; set; }
-            public string my_name { get; set; }
+            
+        }
+
+        public class PrameterData1
+        {
+            public string my_name { get; set; }         
         }
 
         public static string FormatTemplateWithContentTemplate(string contentTempalte, object data)

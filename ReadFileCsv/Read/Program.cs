@@ -11,7 +11,8 @@ namespace Read
     {
         static void Main(string[] args)
         {
-            //ReadCsv.ReadFileCsv("D:\\TestCsv.csv");
+            var createDate = DateTime.UtcNow.ToString("MMM dd,yyyy");
+            Console.WriteLine(createDate);
             Console.ReadLine();
         }
     }
