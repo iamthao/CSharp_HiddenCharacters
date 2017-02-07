@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Framework.Utility;
 
 namespace GanData
 {
@@ -10,22 +12,40 @@ namespace GanData
     {
         static void Main(string[] args)
         {
-            ////var day = 1;
-            ////var startClient = new DateTime(2016, 11, 09, 0, 0, 0);
-            var endClient = new DateTime(2016, 11, 09, 23, 59, 59);
+            var a = Guid.NewGuid().ToString();
+            var b = EncryptHelper.Base64Encode(a);
+            var c = EncryptHelper.Encrypt(a, "6fyrda1a4139gc41");
 
-            ////var startDate = startClient.AddDays(1- day);
-
-            var expiredTime = Math.Round((endClient - DateTime.UtcNow.AddMinutes(420)).TotalSeconds);
-            Console.WriteLine(expiredTime);
-            //if (configValue != null)
-            //{
-                var value = 1;//Convert.ToInt32(configValue.Value);
-                expiredTime = expiredTime + (value - 1) * 86400;
-            //}
-                Console.WriteLine(expiredTime);
-           
+            var str = "23:59";
+            Console.WriteLine(CheckDate(DateTime.Now.ToShortDateString() +" "+ str));
             Console.ReadKey();
+        }
+
+        private static  bool ValidateDate(string date)
+        {
+            var provider = CultureInfo.InvariantCulture;
+            try
+            {
+                var valDate = DateTime.ParseExact(date, "MM/dd/yyyy", null);
+                return true;
+            }
+            catch (FormatException)
+            {
+                return false;
+            }
+        }
+
+        private static bool CheckDate(String date)
+        {
+            try
+            {
+                DateTime dt = DateTime.Parse(date, new CultureInfo("en-US"));
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
     }
 }
