@@ -18,7 +18,16 @@ namespace GenerateDataDefaulPcst
                 var resultRow = script;
                 for (int i = 0; i < totalCol; i++)
                 {
-                    resultRow = resultRow.Replace("{" + i + "}", "'" + row[i].ToString().Replace("'", "''") + "'");
+                    var a = row[i].ToString();
+                    if (string.IsNullOrEmpty(row[i].ToString()))
+                    {
+                        resultRow = resultRow.Replace("{" + i + "}", "NULL");
+                    }
+                    else
+                    {
+                        resultRow = resultRow.Replace("{" + i + "}", "'" + row[i].ToString().Replace("'", "''") + "'");
+                    }
+                    
                 }
                 result += resultRow + ",";
             }

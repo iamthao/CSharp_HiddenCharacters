@@ -46,6 +46,7 @@ namespace Demo
             }
 
             _chromeBrowser = new ChromiumWebBrowser(_path);
+            
             _chromeBrowser.LoadingStateChanged += ChromeBrowserOnLoadingStateChanged;
             _eventPcstForm = new EventPcstForm(_chromeBrowser, CloseForm);
             _chromeBrowser.RegisterJsObject("winformObj", _eventPcstForm);
@@ -54,7 +55,7 @@ namespace Demo
             _chromeBrowser.Dock = DockStyle.Fill;
             ChromeDevToolsSystemMenu.CreateSysMenu(this);
 
-            
+
         }
 
         private void ChromeBrowserOnLoadingStateChanged(object sender, LoadingStateChangedEventArgs loadingStateChangedEventArgs)
@@ -72,7 +73,7 @@ namespace Demo
                 sb.AppendLine("}");
                 _chromeBrowser.ExecuteScriptAsync(sb.ToString());
             }
-            
+
         }
 
         protected override void WndProc(ref Message m)
