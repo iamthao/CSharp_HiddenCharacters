@@ -32,8 +32,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="HtmlAgilityPack">
+      <HintPath>..\packages\HtmlAgilityPack.1.4.9.5\lib\Net45\HtmlAgilityPack.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -41,10 +45,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Base64EncodeDecode.cs" />
     <Compile Include="CompareDateTime.cs" />
     <Compile Include="ConvertStringToInt.cs" />
+    <Compile Include="EmailValidateHelper.cs" />
     <Compile Include="EncryptDecryptString.cs" />
+    <Compile Include="EncryptHelper.cs" />
+    <Compile Include="EnumHelper.cs" />
+    <Compile Include="FileHelper.cs" />
+    <Compile Include="FormatPhoneNumberHelper.cs" />
     <Compile Include="GetNumberFromString.cs" />
+    <Compile Include="GoogleMapApiHelper.cs" />
+    <Compile Include="HtmlDocumentHelper.cs" />
     <Compile Include="RepeatCharToString.cs" />
     <Compile Include="StringIsBool.cs" />
     <Compile Include="StringIsDateTime.cs" />
@@ -54,9 +66,11 @@
     <Compile Include="GetPropValueFromObject.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="XmlDataHelpper.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
