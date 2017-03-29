@@ -41,9 +41,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CompareDateTime.cs" />
     <Compile Include="ConvertStringToInt.cs" />
     <Compile Include="EncryptDecryptString.cs" />
     <Compile Include="GetNumberFromString.cs" />
+    <Compile Include="RepeatCharToString.cs" />
+    <Compile Include="StringIsBool.cs" />
+    <Compile Include="StringIsDateTime.cs" />
+    <Compile Include="StringIsNumber.cs" />
     <Compile Include="StringOnlyDigit.cs" />
     <Compile Include="SetPropValueFromObject.cs" />
     <Compile Include="GetPropValueFromObject.cs" />
