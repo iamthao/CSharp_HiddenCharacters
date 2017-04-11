@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{2F6C1732-A4F0-4655-A5AB-A758E9A3DA6E}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BLLandDAL</RootNamespace>
+    <AssemblyName>BLLandDAL</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.QualityTools.Testing.Fakes, Version=11.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BLL\Chitiethoadon.cs" />
+    <Compile Include="BLL\Chitietkho.cs" />
+    <Compile Include="BLL\Chitietnhaphang.cs" />
+    <Compile Include="BLL\Chitietxuat.cs" />
+    <Compile Include="BLL\Hoadon.cs" />
+    <Compile Include="BLL\Khachhang.cs" />
+    <Compile Include="BLL\Kho.cs" />
+    <Compile Include="BLL\Loaikhachhang.cs" />
+    <Compile Include="BLL\Loainhanvien.cs" />
+    <Compile Include="BLL\Loaisanpham.cs" />
+    <Compile Include="BLL\Luong.cs" />
+    <Compile Include="BLL\Nhacungcap.cs" />
+    <Compile Include="BLL\Nhanvien.cs" />
+    <Compile Include="BLL\Nhaphang.cs" />
+    <Compile Include="BLL\Nhomsanpham.cs" />
+    <Compile Include="BLL\Sanpham.cs" />
+    <Compile Include="BLL\Trangthaihoadon.cs" />
+    <Compile Include="BLL\Xuathang.cs" />
+    <Compile Include="DAL\DalChitietkho.cs" />
+    <Compile Include="DAL\DalHoadon.cs" />
+    <Compile Include="DAL\DalKhachhang.cs" />
+    <Compile Include="DAL\DalKho.cs" />
+    <Compile Include="DAL\DalLoaisanpham.cs" />
+    <Compile Include="DAL\DalNhacungcap.cs" />
+    <Compile Include="DAL\DalNhaphang.cs" />
+    <Compile Include="DAL\DalNhomsanpham.cs" />
+    <Compile Include="DAL\DalSanpham.cs" />
+    <Compile Include="DAL\DalTrangthaihoadon.cs" />
+    <Compile Include="Model.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.Config">
+      <SubType>Designer</SubType>
+    </None>
+    <EntityDeploy Include="Model.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Model.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Fakes Include="Fakes\CrystalDecisions.CrystalReports.Engine.fakes" />
+    <Fakes Include="Fakes\CrystalDecisions.CrystalReports.Engine01.fakes" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -67,7 +67,7 @@ namespace GanData
 
             //
 
-            Console.WriteLine(TryParseIntFromStr("1we3"));
+            Console.WriteLine(CheckFileNameValid("1we3:..backup"));
             Console.ReadKey();
         }
 
@@ -118,6 +118,12 @@ namespace GanData
                 return valInt;
             }
             return null;
+        }
+
+        public static bool CheckFileNameValid(string fileName)
+        {
+            var listCharInvalid = new[] {"\\", "/", ":", "*", "?", "<", ">", "|"};
+            return fileName.All(t => !listCharInvalid.Contains(t.ToString()));
         }
     }
 }
