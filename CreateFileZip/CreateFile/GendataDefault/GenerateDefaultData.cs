@@ -16,10 +16,6 @@ namespace CreateFile.GendataDefault
 
     public static class GenerateDefaultData
     {
-        private const string StrConnect = "Connect";
-        private const string StrDisconnect = "Disconnect";
-        private const string StrGenerate = "Generate";
-        private const string StrCancel = "Generate";
         private static MySqlDataBakup _mySqlDataBakup;
         private static string _connectionString;
         private const int Take = 5000;
