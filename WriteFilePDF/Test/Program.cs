@@ -48,9 +48,9 @@ namespace Test
             cb.EndText();
 
             cb.BeginText();
-            text = "Other random blabla...";
+            text = "Thao Nguyen";
             // put the alignment and coordinates here
-            cb.ShowTextAligned(2, text, 100, 200, 0);
+            cb.ShowTextAligned(1, text, 105, 692, 0);
             cb.EndText();
 
             // create the new page and add it to the pdf
