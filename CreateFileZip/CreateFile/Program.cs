@@ -5,6 +5,7 @@ using System.IO;
 using System.IO.Compression;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using CreateFile.GendataDefault;
 
@@ -16,8 +17,10 @@ namespace CreateFile
         {
             GenerateDefaultData.ExcuteGenerate();
             ZipFile_Compression();
+
             Console.WriteLine("Success!!!");
-            Console.ReadLine();
+            Thread.Sleep(2000);
+            Environment.Exit(0);
         }
 
 
