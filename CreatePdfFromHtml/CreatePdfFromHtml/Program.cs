@@ -14,7 +14,7 @@ namespace CreatePdfFromHtml
         static void Main(string[] args)
         {
             var fileNameSave = Guid.NewGuid().ToString("D") + ".pdf";
-            var localPath =ConfigurationManager.AppSettings["LocalPath"];
+            var localPath = ConfigurationManager.AppSettings["LocalPath"];
 
             // Set Full path
             string destPath = Path.Combine(localPath, fileNameSave);
@@ -45,6 +45,8 @@ namespace CreatePdfFromHtml
         {
            return new
             {
+                img_logo1 = "http://libris-staging.caminois.com/Content/images/LibertyHealthcareLogo.png",
+                img_translationbox = "http://libris-staging.caminois.com/Content/images/translationbox.png",
                 member_mid = "123-456-7890",
                 member_name = "Thao Nguyen",
                 member_address1 = "205 Nguyen Xi",
