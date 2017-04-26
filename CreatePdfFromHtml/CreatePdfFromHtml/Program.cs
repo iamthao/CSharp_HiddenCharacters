@@ -13,7 +13,8 @@ namespace CreatePdfFromHtml
     {
         static void Main(string[] args)
         {
-            var fileNameSave = Guid.NewGuid().ToString("D") + ".pdf";
+            //var fileNameSave = Guid.NewGuid().ToString("D") + ".pdf";
+            var fileNameSave = "TestWritePdf.pdf";
             var localPath = ConfigurationManager.AppSettings["LocalPath"];
 
             // Set Full path
@@ -47,13 +48,13 @@ namespace CreatePdfFromHtml
             {
                 img_logo1 = "http://libris-staging.caminois.com/Content/images/LibertyHealthcareLogo.png",
                 img_translationbox = "http://libris-staging.caminois.com/Content/images/translationbox.png",
-                member_mid = "123-456-7890",
-                member_name = "Thao Nguyen",
-                member_address1 = "205 Nguyen Xi",
-                member_address2 = "Tang 9",
-                member_city = "HCM",
-                member_state = "TX",
-                member_zip = "77014",
+                member_mid =string.Concat(Enumerable.Repeat("_",12)),//"123-456-7890",
+                member_name = string.Concat(Enumerable.Repeat("_", 20)),//"Thao Nguyen",
+                member_address1 = string.Concat(Enumerable.Repeat("_", 20)),//"205 Nguyen Xi",
+                member_address2 = string.Concat(Enumerable.Repeat("_", 15)),//"Tang 9",
+                member_city = string.Concat(Enumerable.Repeat("_", 15)),//"HCM",
+                member_state = string.Concat(Enumerable.Repeat("_", 2)),//"TX",
+                member_zip = string.Concat(Enumerable.Repeat("_", 5)),//"77014",
             };
         }
 
