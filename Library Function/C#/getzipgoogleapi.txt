@@ -1,0 +1,47 @@
+public IHttpActionResult Get(int id)
+        {
+            var city = "";
+            var abbreviationName = "";
+            var url = "http://maps.googleapis.com/maps/api/geocode/json?components=postal_code:" + id + "|country: US";
+            var client = new WebClient();
+            var response = client.DownloadString(new Uri(url));
+            var data = JsonConvert.DeserializeObject<GoogleApiViewModel>(response);
+            if (data != null && data.results.Count > 0 && data.results[0].address_components.Count > 0) {
+                        for (var i = 0; i < data.results[0].address_components.Count; i++) {
+                            if (data.results[0].address_components[i].types.Count > 0) {
+                                for (var j = 0; j < data.results[0].address_components[i].types.Count; j++) {
+                                    if (data.results[0].address_components[i].types[j].Contains("locality")) {
+                                        city = data.results[0].address_components[i].long_name;
+                                    }
+                                    if (data.results[0].address_components[i].types[j].Contains("administrative_area_level_1")) {
+                                        abbreviationName = data.results[0].address_components[i].short_name;
+                                    }
+                                }
+                            }
+                        }
+                    }      
+            var state = new State();           
+            using (var dbContext = new TestDbContext())
+            {
+                state = dbContext.States.FirstOrDefault(o => o.AbbreviationName == abbreviationName);
+            }
+
+            var location = new StateViewModel();
+            if (state != null)
+            {
+                //data.StateId = state.Id;
+                location = new StateViewModel
+                {
+                    Zip = id,
+                    City = city,
+                    State = state.Name,
+                    StateId = state.Id
+                };
+            }
+            else
+            {
+                location = new StateViewModel();
+            }
+
+            return Ok(location);
+        }

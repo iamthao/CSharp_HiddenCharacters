@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
+using Test2;
 
 namespace CreatePdfFromHtml
 {
@@ -13,8 +14,7 @@ namespace CreatePdfFromHtml
     {
         static void Main(string[] args)
         {
-            //var fileNameSave = Guid.NewGuid().ToString("D") + ".pdf";
-            var fileNameSave = "TestWritePdf.pdf";
+            var fileNameSave = Guid.NewGuid().ToString("D") + ".pdf";
             var localPath = ConfigurationManager.AppSettings["LocalPath"];
 
             // Set Full path
@@ -35,8 +35,10 @@ namespace CreatePdfFromHtml
             var footer = TemplateHelpper.FormatTemplateWithContentTemplate(HttpUtility.HtmlDecode(footerNoData), data);
             var content = TemplateHelpper.FormatTemplateWithContentTemplate(HttpUtility.HtmlDecode(contentNoData), data);
            
-            SystemPdfService.ExportPdfWithHeaderFooter(destPath, content, header, footer, marginTop: marginTop,
-                marginBottom: marginBottom, marginLeft: marginLeft, marginRigth: marginRight);
+            //SystemPdfService.ExportPdfWithHeaderFooter(destPath, content, header, footer, marginTop: marginTop,
+            //    marginBottom: marginBottom, marginLeft: marginLeft, marginRigth: marginRight);
+
+            CreateFilePdf.RunAction(content, destPath);
 
             Console.WriteLine("Success!!!");
             Console.ReadLine();

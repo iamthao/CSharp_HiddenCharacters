@@ -25,20 +25,25 @@ namespace CreateFile.GendataDefault
 
         private static string _saveTo = "";
 
-        public static void ExcuteGenerate()
+        public static void ExcuteGenerate(out List<string> mess)
         {
+            mess = new List<string>();
             var startGenerate = true;
             string connectionStringKey = ConfigurationManager.AppSettings["ConnectionString"];
             if (string.IsNullOrEmpty(connectionStringKey))
             {
                 startGenerate = false;
                 Console.WriteLine("ConnectionString not found in App.config");
+                
+                mess.Add("ConnectionString not found in App.config");
             }
             string saveToKey = ConfigurationManager.AppSettings["SaveTo"];
             if (string.IsNullOrEmpty(saveToKey))
             {
                 startGenerate = false;
                 Console.WriteLine("SaveTo not found in App.config");
+
+                mess.Add("SaveTo not found in App.config");
             }
 
             if (startGenerate)
@@ -46,15 +51,20 @@ namespace CreateFile.GendataDefault
                 _conn = connectionStringKey;
                 _saveTo = saveToKey;
                 var start = DateTime.Now;
-                Console.WriteLine( start.ToString("MM/dd/yyyy HH:mm:ss") + ": Start Generate" );
+                Console.WriteLine(start.ToString("MM-dd-yyyy HH:mm:ss") + ": Start Generate");
+                mess.Add(start.ToString("MM-dd-yyyy HH:mm:ss") + ": Start Generate");
+
                 ConnectDatabase();
                 InitFileDb();
                 Generate();
                 var end = DateTime.Now;
-                Console.WriteLine( end.ToString("MM/dd/yyyy HH:mm:ss")+ ": End Generate" );
+                Console.WriteLine(end.ToString("MM-dd-yyyy HH:mm:ss") + ": End Generate");
                 Console.WriteLine("Total Generate: " + (end - start).TotalSeconds + " s\n");
+
+                mess.Add(end.ToString("MM-dd-yyyy HH:mm:ss") + ": End Generate");
+                mess.Add("Total Generate: " + (end - start).TotalSeconds + " s\n");
             }
-           
+
         }
 
         private static void ConnectDatabase()
