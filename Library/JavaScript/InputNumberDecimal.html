@@ -1,0 +1,22 @@
+1. Allowing only numbers and decimal point
+<HTML>
+  <HEAD>
+    <SCRIPT language=Javascript>
+       <!--
+       function isNumberKey(evt)
+       {
+          var charCode = (evt.which) ? evt.which : evt.keyCode;
+          if (charCode != 46 && charCode > 31 
+            && (charCode < 48 || charCode > 57))
+             return false;
+
+          return true;
+       }
+       //-->
+    </SCRIPT>
+  </HEAD>
+  <BODY>
+    <INPUT id="txtChar" onkeypress="return isNumberKey(event)" 
+           type="text" name="txtChar">
+  </BODY>
+</HTML>

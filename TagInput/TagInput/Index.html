@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html>
+<html ng-app="plunker">
+
+<head>
+    <meta charset="utf-8" />
+    <title>AngularJS Plunker</title>
+    <script>document.write('<base href="' + document.location + '" />');</script>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="http://mbenford.github.io/ngTagsInput/css/ng-tags-input.min.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular.min.js"></script>
+    <script src="http://mbenford.github.io/ngTagsInput/js/ng-tags-input.min.js"></script>
+    <script src="app.js"></script>
+</head>
+
+<body ng-controller="MainCtrl">
+<label>Country</label>
+    <tags-input ng-model="tags"
+                display-property="name"
+                placeholder="Add a country"
+                replace-spaces-with-dashes="false"
+                template="tag-template"
+                add-from-autocomplete-only="true">
+        <auto-complete source="loadCountries($query)"
+                       min-length="0"
+                       load-on-focus="true"
+                       load-on-empty="true"
+                       max-results-to-show="32"
+                       template="autocomplete-template"></auto-complete>
+    </tags-input>
+<button ng-click="showData();">Show Data</button>
+<script type="text/ng-template" id="tag-template">
+        <div class="tag-template">
+            <div class="left-panel">
+                <img ng-src="http://mbenford.github.io/ngTagsInput/images/flags/{{data.flag}}" ng-if="data.flag" />
+            </div>
+            <div class="right-panel">
+                <span>{{$getDisplayText()}}</span>
+                <a class="remove-button" ng-click="$removeTag()">&#10006;</a>
+            </div>
+        </div>
+    </script>
+
+<script type="text/ng-template" id="autocomplete-template">
+        <div class="autocomplete-template">
+            <div class="left-panel">
+                <img ng-src="http://mbenford.github.io/ngTagsInput/images/flags/{{data.flag}}" />
+            </div>
+            <div class="right-panel">
+                <span ng-bind-html="$highlight($getDisplayText())"></span>
+                <span>({{data.rank}})</span>
+                <span>{{data.confederation}}</span>
+            </div>
+        </div>
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <base href="http://demos.telerik.com/kendo-ui/listview/angular">
+    <style>html { font-size: 14px; font-family: Arial, Helvetica, sans-serif; }</style>
+    <title></title>
+    <link rel="stylesheet" href="//kendo.cdn.telerik.com/2016.1.112/styles/kendo.common-material.min.css" />
+    <link rel="stylesheet" href="//kendo.cdn.telerik.com/2016.1.112/styles/kendo.material.min.css" />
+
+    <script src="//kendo.cdn.telerik.com/2016.1.112/js/jquery.min.js"></script>
+    <script src="//kendo.cdn.telerik.com/2016.1.112/js/angular.min.js"></script>
+    <script src="//kendo.cdn.telerik.com/2016.1.112/js/kendo.all.min.js"></script>
+</head>
+<body>
+<script src="../content/shared/js/products.js"></script>
+
+<div id="example" ng-app="KendoDemos">
+    <div ng-controller="MyCtrl">
+
+    <div class="demo-section k-content wide">
+        <div kendo-list-view id="listView" k-data-source="source">
+            <div class="test" k-template="KdoTemplate('template')"">		
+				
+            </div>
+        </div>
+        <div kendo-pager k-data-source="source"></div>
+    </div>
+
+    <script type="text/x-kendo-angular-template" id="template">
+	<span>#:dataItem.Name#</span>
+    </script>
+
+    
+</div>
+</div>
+
+<script>
+    angular.module("KendoDemos", [ "kendo.directives" ])
+        .controller("MyCtrl", function($scope){
+		 $scope.KdoTemplate = function(tname) {
+			return kendo.template($('#' + tname).html());
+		  };
+      var data=[{Id:1,IsSelected:false,Name:"Production 1"},
+                {Id:2,IsSelected:true,Name:"Production 2"},
+                {Id:3,IsSelected:true,Name:"Production 3"},
+                {Id:4,IsSelected:false,Name:"Production 4"},
+                {Id:5,IsSelected:false,Name:"Production 5"},
+        ];
+            $scope.source = new kendo.data.DataSource({
+                data: data,
+                pageSize: 21
+            });
+        })
+</script>
+
+
+</body>
+</html>
