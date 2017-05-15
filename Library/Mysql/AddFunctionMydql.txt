@@ -1,0 +1,10 @@
+DROP FUNCTION IF EXISTS DiffDays;
+DELIMITER $$
+CREATE FUNCTION DiffDays(startTime DATETIME, endTime DATETIME)
+  RETURNS DECIMAL
+  LANGUAGE SQL -- This element is optional and will be omitted from subsequent examples
+BEGIN
+  RETURN TIMESTAMPDIFF(SECOND,startTime,endTime);
+END;
+$$
+DELIMITER ;
