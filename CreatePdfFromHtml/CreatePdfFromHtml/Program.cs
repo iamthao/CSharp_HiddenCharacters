@@ -14,11 +14,12 @@ namespace CreatePdfFromHtml
     {
         static void Main(string[] args)
         {
-            var fileNameSave = Guid.NewGuid().ToString("D") + ".pdf";
-            var localPath = ConfigurationManager.AppSettings["LocalPath"];
+            
 
             // Set Full path
-            string destPath = Path.Combine(localPath, fileNameSave);
+            var start = DateTime.Now;
+            Console.WriteLine(start.ToString("yyyy-MM-dd HH:mm:ss") +" Start");
+
             var marginBottom = 45;
             var marginTop = 45;
             var marginLeft = 24;
@@ -38,9 +39,31 @@ namespace CreatePdfFromHtml
             //SystemPdfService.ExportPdfWithHeaderFooter(destPath, content, header, footer, marginTop: marginTop,
             //    marginBottom: marginBottom, marginLeft: marginLeft, marginRigth: marginRight);
 
-            CreateFilePdf.RunAction(content, destPath);
+            var listFile = new List<byte[]>();
+            for (int i=0;i<2;i++)
+            {
+                var start1 = DateTime.Now;
+                var fileNameSave = Guid.NewGuid().ToString("D") + ".pdf";
+                var localPath = ConfigurationManager.AppSettings["LocalPath"];
+                string destPath = Path.Combine(localPath, fileNameSave);
 
-            Console.WriteLine("Success!!!");
+                listFile.Add(GetByteFromFile(SystemPdfService.ExportPdfWithHeaderFooter(destPath, content, header, footer, marginTop: marginTop,
+                marginBottom: marginBottom, marginLeft: marginLeft, marginRigth: marginRight)));
+
+                var end1 = DateTime.Now;
+                Console.WriteLine("Template " + (i+1)+ " : " + (end1 - start1).TotalSeconds);
+            }
+
+            var fileNameSaveDes = Guid.NewGuid().ToString("D") + ".pdf";
+            var localPathDes = ConfigurationManager.AppSettings["LocalPath"];
+            var pathResult = Path.Combine(localPathDes, fileNameSaveDes);
+
+            var bytesResult = MergePdf.CombineMultiplePdfsByByte(listFile);
+            File.WriteAllBytes(pathResult, bytesResult);
+
+            var end = DateTime.Now;
+            Console.WriteLine(end.ToString("yyyy-MM-dd HH:mm:ss") + " Start");
+            Console.WriteLine("Success!!!" + ReturnStringHour((end - start).TotalSeconds));
             Console.ReadLine();
         }
 
@@ -60,6 +83,18 @@ namespace CreatePdfFromHtml
             };
         }
 
-      
+        public static byte[] GetByteFromFile(string path)
+        {
+            return System.IO.File.ReadAllBytes(path);
+        }
+
+        public static string ReturnStringHour(double second)
+        {
+            TimeSpan time = TimeSpan.FromSeconds(second);
+
+            //here backslash is must to tell that colon is
+            //not the part of format, it just a character that we want in output
+            return time.ToString(@"hh\:mm\:ss");
+        }
     }
 }

@@ -10,25 +10,31 @@ namespace Test
     {
         private static void Main(string[] args)
         {
-            var list = new List<MyClass>()
+            var list = new List<Test1>()
             {
-                new MyClass()
+                new Test1()
                 {
-                    Start = DateTime.Now.AddHours(-2),
+                    Name = "Test 1",
+                    Age = 1
                 },
-                new MyClass(){
-                    Start = DateTime.Now.AddHours(-10),
-                    End = DateTime.Now.AddHours(-2),
+                new Test1(){
+                     Name = "Test 2",
+                    Age = 2
                 },
             };
 
-            var q = from myClass in list
-                select new MyClassVo
+
+            var q = (from myClass in list
+                     select new Test1
                 {
-                    Start = myClass.StartNotNull,
-                    End = myClass.EndNotNull,
-                    TimeSpanStart = myClass.TimeSpanStart
-                };
+                    Name = myClass.Name,
+                    Age = myClass.Age,                
+                }).ToList();
+            var b = 1;
+            var a = b;
+            b = 2;
+
+            q[0].Age = 3;
 
             Console.ReadLine();
         }
@@ -83,6 +89,12 @@ namespace Test
             public DateTime End { get; set; }
             public TimeSpan Duration { get; set; }
             public double TimeSpanStart { get; set; }
+        }
+
+        public class  Test1
+        {
+            public string Name { get; set; }
+            public int  Age { get; set; }
         }
     }
 }

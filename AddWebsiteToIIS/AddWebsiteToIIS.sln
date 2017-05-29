@@ -13,6 +13,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModifyConfigXml", "ModifyCo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InstallDatabase", "InstallDatabase\InstallDatabase.csproj", "{E0530E85-86B2-487C-B4D1-3C5E7480ABE3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InstallService", "InstallService\InstallService.csproj", "{7E0CF4E5-C23E-48F7-944C-56C875CD5BC1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceTest", "ServiceTest\ServiceTest.csproj", "{23AC4F2B-26CF-4D63-9418-96EF1E64E5F6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +43,14 @@ Global
 		{E0530E85-86B2-487C-B4D1-3C5E7480ABE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E0530E85-86B2-487C-B4D1-3C5E7480ABE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E0530E85-86B2-487C-B4D1-3C5E7480ABE3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7E0CF4E5-C23E-48F7-944C-56C875CD5BC1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7E0CF4E5-C23E-48F7-944C-56C875CD5BC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7E0CF4E5-C23E-48F7-944C-56C875CD5BC1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7E0CF4E5-C23E-48F7-944C-56C875CD5BC1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{23AC4F2B-26CF-4D63-9418-96EF1E64E5F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{23AC4F2B-26CF-4D63-9418-96EF1E64E5F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{23AC4F2B-26CF-4D63-9418-96EF1E64E5F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{23AC4F2B-26CF-4D63-9418-96EF1E64E5F6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

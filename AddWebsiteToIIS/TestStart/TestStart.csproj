@@ -60,6 +60,10 @@
       <Project>{e0530e85-86b2-487c-b4d1-3c5e7480abe3}</Project>
       <Name>InstallDatabase</Name>
     </ProjectReference>
+    <ProjectReference Include="..\InstallService\InstallService.csproj">
+      <Project>{7e0cf4e5-c23e-48f7-944c-56c875cd5bc1}</Project>
+      <Name>InstallService</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ModifyConfigXml\ModifyConfigXml.csproj">
       <Project>{c7c650d2-b763-4cbb-85e7-cce695752a51}</Project>
       <Name>ModifyConfigXml</Name>
