@@ -1,0 +1,29 @@
+.loader {
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    /*right: 0;
+    bottom: 0;*/
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    /*background: #ffffff*/  /*50% 50% no-repeat*/ ;
+    /*-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";*/       /* IE 8 */
+        /*-moz-opacity: 0.5;*/          /* Netscape */
+        /*-khtml-opacity: 0.5;*/        /* Safari 1.x */
+        /*opacity: 0.3;*/  
+    /*background: url('/Content/img/ajax-loader.gif') 50% 50% no-repeat rgb(249,249,249);*/
+}
+
+<div class="loader" >
+    <img src="/Content/img/ajax-loader.gif" style="bottom: 0; right: 0; position: fixed;padding-bottom: 10px; padding-right: 10px;"/>
+</div>
+
+function activate() {               
+            $(".loader").fadeIn();
+            setTimeout(function () {
+                $scope.$apply(function () {
+                    $(".loader").fadeOut();
+                });
+            }, 3000);
+        };

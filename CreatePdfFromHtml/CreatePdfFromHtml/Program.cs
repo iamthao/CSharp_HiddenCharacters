@@ -35,34 +35,40 @@ namespace CreatePdfFromHtml
             var header = TemplateHelpper.FormatTemplateWithContentTemplate(HttpUtility.HtmlDecode(headerNoData), data);
             var footer = TemplateHelpper.FormatTemplateWithContentTemplate(HttpUtility.HtmlDecode(footerNoData), data);
             var content = TemplateHelpper.FormatTemplateWithContentTemplate(HttpUtility.HtmlDecode(contentNoData), data);
-           
-            //SystemPdfService.ExportPdfWithHeaderFooter(destPath, content, header, footer, marginTop: marginTop,
-            //    marginBottom: marginBottom, marginLeft: marginLeft, marginRigth: marginRight);
 
-            var listFile = new List<byte[]>();
-            for (int i=0;i<2;i++)
-            {
-                var start1 = DateTime.Now;
-                var fileNameSave = Guid.NewGuid().ToString("D") + ".pdf";
-                var localPath = ConfigurationManager.AppSettings["LocalPath"];
-                string destPath = Path.Combine(localPath, fileNameSave);
+            //----Start-------
+            var fileNameSave = Guid.NewGuid().ToString("D") + ".pdf";
+            var localPath = ConfigurationManager.AppSettings["LocalPath"];
+            string destPath = Path.Combine(localPath, fileNameSave);
+            SystemPdfService.ExportPdfWithHeaderFooter(destPath, content, header, footer, marginTop: marginTop,
+                marginBottom: marginBottom, marginLeft: marginLeft, marginRigth: marginRight);
 
-                listFile.Add(GetByteFromFile(SystemPdfService.ExportPdfWithHeaderFooter(destPath, content, header, footer, marginTop: marginTop,
-                marginBottom: marginBottom, marginLeft: marginLeft, marginRigth: marginRight)));
+            //-------------End--------
 
-                var end1 = DateTime.Now;
-                Console.WriteLine("Template " + (i+1)+ " : " + (end1 - start1).TotalSeconds);
-            }
+            //var listFile = new List<byte[]>();
+            //for (int i = 0; i < 2; i++)
+            //{
+            //    var start1 = DateTime.Now;
+            //    var fileNameSave = Guid.NewGuid().ToString("D") + ".pdf";
+            //    var localPath = ConfigurationManager.AppSettings["LocalPath"];
+            //    string destPath = Path.Combine(localPath, fileNameSave);
 
-            var fileNameSaveDes = Guid.NewGuid().ToString("D") + ".pdf";
-            var localPathDes = ConfigurationManager.AppSettings["LocalPath"];
-            var pathResult = Path.Combine(localPathDes, fileNameSaveDes);
+            //    listFile.Add(GetByteFromFile(SystemPdfService.ExportPdfWithHeaderFooter(destPath, content, header, footer, marginTop: marginTop,
+            //    marginBottom: marginBottom, marginLeft: marginLeft, marginRigth: marginRight)));
 
-            var bytesResult = MergePdf.CombineMultiplePdfsByByte(listFile);
-            File.WriteAllBytes(pathResult, bytesResult);
+            //    var end1 = DateTime.Now;
+            //    Console.WriteLine("Template " + (i + 1) + " : " + (end1 - start1).TotalSeconds);
+            //}
+
+            //var fileNameSaveDes = Guid.NewGuid().ToString("D") + ".pdf";
+            //var localPathDes = ConfigurationManager.AppSettings["LocalPath"];
+            //var pathResult = Path.Combine(localPathDes, fileNameSaveDes);
+
+            //var bytesResult = MergePdf.CombineMultiplePdfsByByte(listFile);
+            //File.WriteAllBytes(pathResult, bytesResult);
 
             var end = DateTime.Now;
-            Console.WriteLine(end.ToString("yyyy-MM-dd HH:mm:ss") + " Start");
+            Console.WriteLine(end.ToString("yyyy-MM-dd HH:mm:ss") + " End");
             Console.WriteLine("Success!!!" + ReturnStringHour((end - start).TotalSeconds));
             Console.ReadLine();
         }

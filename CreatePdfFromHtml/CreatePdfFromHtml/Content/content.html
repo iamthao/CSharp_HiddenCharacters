@@ -1,3 +1,89 @@
 <div style="font-size:12pt;" >
-	Liberty Healthcare Corporation
+    <table>
+        <tbody>
+            <tr id="Section2-Header">
+                <td style="border-top: 2px solid #000;border-bottom: 2px solid #000;">
+                    <p style="margin: 5px 0;font-size: 22px;font-weight: bold;">SECTION I(a) — ASSESSMENT INFORMATION </p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <table width="100%">
+                        <tbody>
+                            <tr>
+                                <!--order 5-->
+                                <td id="Order5-Field01-Highlight">
+                                    <p style="margin: 5px 0;">
+                                        <b>5. Assessment Type *</b>
+                                        <label style="margin-right: 30px;"></label>
+                                        <span id="Order5-Answer">
+
+                                            <label style="margin-right: 30px;"><input type="radio" name="Order5-Field01" value="1" disabled="" checked="checked">Initial</label>
+                                            <label style="margin-right: 30px;"><input type="radio" name="Order5-Field01" value="5" disabled="">Continuation</label>
+                                            <label style="margin-right: 30px;"><input type="radio" name="Order5-Field01" value="3" disabled="">Change of Status</label>
+                                            <label style="margin-right: 30px;"><input type="radio" name="Order5-Field01" value="2" disabled="">Expedited</label>
+                                        </span>
+                                    </p>
+                                </td>
+                                <!--order 6-->
+                                <td>
+                                    <p style="margin: 5px 0;"><b>6. Assessment Completion Date *</b></p>
+                                    <div id="Order6-Field01-Highlight">
+                                        <p style="margin: 5px 0;" class="datepicker-pcst" id="AssessmentCompleteDate">
+                                            <input class="date-pick" id="Order6-Field01" placeholder="MM/dd/yyyy" type="text" style="width: 100%; border: none;padding: 5px 0 0 0;border-bottom: 1px dotted #000;" value="05/28/2017">
+                                        </p>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <table width="100%">
+                                        <tbody>
+                                            <tr>
+                                                <!--order 7-->
+                                                <td>
+                                                    <p style="margin: 5px 0;"><b>7. Assessment Start Time</b></p>
+                                                    <p style="margin: 5px 0;" id="Order7-Field01-Highlight">
+                                                        <input id="Order7-Field01" type="text" class="hour" placeholder="HH:mm" style="width: 100%; border: none;padding: 5px 0 0 0;border-bottom: 1px dotted #000;">
+                                                    </p>
+                                                </td>
+                                                <!--order 8-->
+                                                <td>
+                                                    <p style="margin: 5px 0;"><b>8. Assessment End Time</b></p>
+                                                    <p style="margin: 5px 0;" id="Order8-Field01-Highlight">
+                                                        <input id="Order8-Field01" type="text" class="hour" placeholder="HH:mm" style="width: 100%; border: none;padding: 5px 0 0 0;border-bottom: 1px dotted #000;">
+                                                    </p>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <!--order 9-->
+                                <td colspan="2">
+                                    <div>
+                                        <div style="margin: 5px 0;text-align: center;width:100%"><b>9. Other Person(s) Present During Assessment</b></div>
+                                        <div id="Order9-Answer" class="AnswerTable">
+                                            <table width="100%" id="tbAppendRowTable" class="child-table hasborderinreport normal-header-bold-response">
+                                                <tbody>
+                                                    <tr>
+                                                        <th>Name</th>
+                                                        <th>Relationship to Member</th>
+                                                        <th>Name</th>
+                                                        <th>Relationship to Member</th>
+                                                    </tr>
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </div>

@@ -1,0 +1,2 @@
+ALTER TABLE 360vms.staff  
+  ADD COLUMN fullname VARCHAR(150) AS (CONCAT(lastname,' ',firstname,(CASE WHEN (ISNULL(middlename) OR (middlename = '')) THEN '' ELSE CONCAT(' ',middlename) END))) NULL AFTER middlename;

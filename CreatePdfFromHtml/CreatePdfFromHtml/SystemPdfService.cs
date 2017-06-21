@@ -67,43 +67,43 @@ namespace CreatePdfFromHtml
         private static void _handleHeaderBodyFooter(string path, string htmlContent, string htmlFooter, string htmlHeader)
         {
             _pathTempSaveFile = path;
-//            var htmlDocumentHelper = new HtmlDocumentHelper(htmlContent);
+            var htmlDocumentHelper = new HtmlDocumentHelper(htmlContent);
 
-//            if (!string.IsNullOrEmpty(htmlHeader) && !string.IsNullOrEmpty(htmlHeader.Trim()))
-//            {
-//                _headerContent = @"<!DOCTYPE html><html lang='en' xmlns='http://www.w3.org/1999/xhtml'>
-//                                             <head>
-//                                            <meta http-equiv='Content-Type' content='text/html; charset=UTF-8'>      
-//                                            <style>
-//                                            thead{display: table-header-group;}
-//                                            tfoot {display: table-row-group;}
-//                                            tr {page-break-inside: avoid;}
-//                                            </style>
-//                                             </head>
-//                                             <body style='overflow:hidden;padding:10px 0;'>" + htmlHeader + "</body></html>";
-//            }
-//            if (!string.IsNullOrEmpty(htmlFooter) && !string.IsNullOrEmpty(htmlFooter.Trim()))
-//            {
-//                _footerContent = @"<!DOCTYPE html><html lang='en' xmlns='http://www.w3.org/1999/xhtml'>
-//                                             <head>
-//                                            <meta http-equiv='Content-Type' content='text/html; charset=UTF-8'>                                           
-//                                            <script>
-//                                            function subst() {
-//                                            var vars={};
-//                                            var x=window.location.search.substring(1).split('&');
-//                                            for (var i in x) {var z=x[i].split('=',2);vars[z[0]] = unescape(z[1]);}
-//                                            var x=['frompage','topage','page','webpage','section','subsection','subsubsection'];
-//                                            for (var i in x) {
-//                                                var y = document.getElementsByClassName(x[i]);
-//                                                for (var j=0; j<y.length; ++j) y[j].textContent = vars[x[i]];
-//                                            }
-//                                            }
-//                                            </script>
-//                                             </head>
-//                                             <body onload='subst()'>" + htmlFooter + "</body></html>";
-//            }
+            if (!string.IsNullOrEmpty(htmlHeader) && !string.IsNullOrEmpty(htmlHeader.Trim()))
+            {
+                _headerContent = @"<!DOCTYPE html><html lang='en' xmlns='http://www.w3.org/1999/xhtml'>
+                                             <head>
+                                            <meta http-equiv='Content-Type' content='text/html; charset=UTF-8'>      
+                                            <style>
+                                            thead{display: table-header-group;}
+                                            tfoot {display: table-row-group;}
+                                            tr {page-break-inside: avoid;}
+                                            </style>
+                                             </head>
+                                             <body style='overflow:hidden;padding:10px 0;'>" + htmlHeader + "</body></html>";
+            }
+            if (!string.IsNullOrEmpty(htmlFooter) && !string.IsNullOrEmpty(htmlFooter.Trim()))
+            {
+                _footerContent = @"<!DOCTYPE html><html lang='en' xmlns='http://www.w3.org/1999/xhtml'>
+                                             <head>
+                                            <meta http-equiv='Content-Type' content='text/html; charset=UTF-8'>                                           
+                                            <script>
+                                            function subst() {
+                                            var vars={};
+                                            var x=window.location.search.substring(1).split('&');
+                                            for (var i in x) {var z=x[i].split('=',2);vars[z[0]] = unescape(z[1]);}
+                                            var x=['frompage','topage','page','webpage','section','subsection','subsubsection'];
+                                            for (var i in x) {
+                                                var y = document.getElementsByClassName(x[i]);
+                                                for (var j=0; j<y.length; ++j) y[j].textContent = vars[x[i]];
+                                            }
+                                            }
+                                            </script>
+                                             </head>
+                                             <body onload='subst()'>" + htmlFooter + "</body></html>";
+            }
 
-//            _bodyContent = htmlContent;
+            _bodyContent = htmlContent;
         }
 
         private static void _export(bool isLandscape = false, float? marginLeft = 5, float? marginRigth = 5,
