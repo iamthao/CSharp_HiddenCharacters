@@ -47,6 +47,60 @@
         .k-checkbox-label {
             padding-top: 3px;
         }
+
+        .input-disabled {
+            background-color: #EBECED;
+        }
+
+        input[type='text'] {
+            margin-top: 0;
+        }
+
+        #content-section tbody {
+            font-size: 13px;
+        }
+
+        #content-section-div {
+            overflow-y: auto;
+            overflow-x: hidden;
+            height: calc(100% - 160px);
+        }
+
+        .pcst-footer {
+            padding: 5px 0;
+            border-top: 1px solid #ccc;
+            margin: 0 !important;
+        }
+        #Order43-Answer th {
+            height: 30px;
+        }
+        .list input[type="text"] {
+            min-height: 25px;
+            line-height: 20px;
+            padding: 0 !important;
+            width: calc(100% - 10px) !important;
+            margin: 5px;
+        }
+        .list p input[type="text"] {
+            min-height: 25px;
+            line-height: 20px;
+            width: 100% !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+        .list div[contenteditable="true"] {
+            line-height: 24px;
+        }
+        .list .k-input.combobox {
+            height: 25px !important;
+            margin-top: 0 !important;
+        }
+        .list .k-dropdown-wrap{
+            height: 24px;
+            box-shadow: none;
+            border: none;
+            padding: 0 1.2em 0 0 !important;
+        }
     </style>
 </head>
 <body ng-controller="PcstController as vm">
@@ -238,11 +292,11 @@
                                                 <tbody>
                                                     <tr class="list">
                                                         <td class="p0 col-md-6 col-sm-6 col-xs-12">
-                                                            
+
                                                             <div class="form-group col-md-12 col-sm-12 col-xs-12">
                                                                 <label class="p0 col-md-12 col-sm-12 col-xs-12 control-label" style="font-size: 13px;">Name <span class=" red">*</span></label>
                                                                 <div class="p0 col-md-12 col-sm-12 col-xs-12">
-                                                                    <input id="Order43-Field01-1-Field01" type="text" maxlength="100" class="k-textbox " style="width: 100%;height: 32px;" autocomplete="on" name="Order43-Field01-1-Field01">
+                                                                    <input id="Order43-Field01-1-Field01" type="text" maxlength="100" class="k-textbox " style="font-size: 13px;width: 100%;height: 32px;" autocomplete="on" name="Order43-Field01-1-Field01">
                                                                 </div>
                                                             </div>
                                                         </td>
@@ -250,7 +304,7 @@
                                                             <div class="form-group col-md-12 col-sm-12 col-xs-12">
                                                                 <label class="p0 col-md-12 col-sm-12 col-xs-12 control-label" style="font-size: 13px;">Relationship<span class=" red">*</span></label>
                                                                 <div class="p0 col-md-12 col-sm-12 col-xs-12">
-                                                                    <input id="Order43-Field01-1-Field02" type="text" maxlength="100" class="k-textbox " style="width: 100%;height: 32px;" autocomplete="on" name="Order43-Field01-1-Field02">
+                                                                    <input id="Order43-Field01-1-Field02" type="text" maxlength="100" class="k-textbox " style="font-size: 13px;width: 100%;height: 32px;" autocomplete="on" name="Order43-Field01-1-Field02">
                                                                 </div>
 
                                                             </div>
@@ -307,7 +361,7 @@
                                                     </span>
                                                 </div>
                                             </div>
-                                        </div>                       
+                                        </div>
                                         <div class="form-group col-md-12 col-sm-12 col-xs-12">
                                             <label class="p0 control-label col-md-12 col-sm-12 col-xs-12">&nbsp;</label>
                                             <div class="p0 col-md-12 col-sm-12 col-xs-12">
@@ -328,7 +382,7 @@
                                         </div>
                                         <div class="form-group col-sm-12 col-xs-12 no-padding">
                                             <label class="col-md-12 col-sm-12 col-xs-12 control-label">
-                                               
+
                                                 The following information SHOULD NOT be released: (Please specify or indicate "none") <span class="red">*</span>
                                             </label>
 
@@ -368,7 +422,7 @@
                                         <div class="form-group col-md-4 col-sm-4 col-xs-12">
                                             <label class="p0 col-md-12 col-sm-12 col-xs-12 control-label">
                                                 Print Name <span ng-show="vm.GuardianIsRequired" class="red">*</span>
-                                               
+
                                             </label>
 
                                             <div class="p0 col-md-12 col-sm-12 col-xs-12">
@@ -379,7 +433,7 @@
                                         <div class="form-group col-md-4 col-sm-4 col-xs-12">
                                             <label class="p0 col-md-12 col-sm-12 col-xs-12 control-label">
                                                 Relationship to Member <span ng-show="vm.GuardianIsRequired" class="red">*</span>
-                                               
+
                                             </label>
 
                                             <div class="p0 col-md-12 col-sm-12 col-xs-12">
@@ -389,7 +443,7 @@
                                         </div>
                                         <div class="form-group col-md-2 col-sm-2 col-xs-12">
                                             <label class="p0 col-md-12 col-sm-12 col-xs-12 control-label">
-                                                Date Signed <span  class="red">*</span>
+                                                Date Signed <span class="red">*</span>
                                             </label>
 
                                             <div class="p0 col-md-12 col-sm-12 col-xs-12">
@@ -460,7 +514,7 @@
                 </div>
                 <div class="tab-pane" id="pcstform">
                     <div id="content-container">
-                        <div class="x_panel">
+                        <div class="x_panel" style="margin-bottom:0;padding-bottom:0;border:none">
                             <form name="popupForm" style="font-size: 9px;">
                                 <table width="100%" cellpadding="0" cellspacing="0">
                                     <tr>
@@ -468,8 +522,8 @@
                                             <table width="100%">
                                                 <tr>
                                                     <td style="text-align: center;">
-                                                        <p style="margin: 1px 0;font-size: 15px;font-weight: bold;">LIBERTY HEALTHCARE</p>
-                                                        <p style="margin: 1px 0;font-size: 15px;font-weight: bold;">PERSONAL CARE SCREENING TOOL (PCST)</p>
+                                                        <p style="margin: 1px 0; font-size: 15px; font-weight: bold;">FORWARDHEALTH</p>
+                                                        <p style="margin: 1px 0; font-size: 15px; font-weight: bold;">PERSONAL CARE SCREENING TOOL (PCST)</p>
                                                     </td>
                                                 </tr>
                                             </table>
@@ -477,23 +531,30 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                            <p style="margin: 1px 0;"><b>Instructions:</b> Print or type clearly.  Refer to the Personal Care Screening Tool (PCST) Completion Instructions. </p>
-                                            <p style="margin: 1px 0;"><b>All items marked with ( * ) asterisks are required.</b></p>
+                                            <p style="margin: 1px 0;">
+                                                <b>Instructions:</b> Print or type clearly. Refer to the Personal Care Screening Tool (PCST) Completion Instructions.
+                                            </p>
+                                            <p style="margin: 1px 0;">
+                                                <b>All items marked with ( * ) asterisks are required.</b>
+                                            </p>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
-                                            <select id="select-section" style="margin-top: 5px;font-weight: bold;" class="form-control" ng-model="vm.SectionItemSelected" ng-options="item as item.Name for item in vm.SectionList"></select>
+                                            <select id="select-section" style="margin-top: 5px; font-weight: bold;" class="form-control" ng-model="vm.SectionItemSelected" ng-options="item as item.Name for item in vm.SectionList"></select>
                                             <hr style="margin: 5px 0" />
                                         </td>
                                     </tr>
                                 </table>
-                                <table id="content-section" width="100%" cellpadding="0" cellspacing="0" ng-bind-html="vm.ContetHtml"></table>
-                                <div class="load-more-block text-center">
-                                    <a class="btn btn-thin btn-default" ng-disabled="vm.SectionItemSelected.Order == 1" ng-click="vm.PrevSection()"> <i class="fa fa-angle-double-up"></i> Previous Section</a>
-                                    <a class="btn btn-thin btn-default" ng-disabled="!vm.IsShowNextSection" ng-click="vm.NextSection()"> <i class="fa fa-angle-double-down"></i> Next Section</a>
+                                <div id="content-section-div">
+                                    <table id="content-section" width="100%" cellpadding="0" cellspacing="0" ng-bind-html="vm.ContetHtml" style="font-size: 13px;"></table>
+                                    <div class="load-more-block text-center">
+                                        <a class="btn btn-thin btn-default" ng-disabled="vm.SectionItemSelected.Order == 1" ng-click="vm.PrevSection()"> <i class="fa fa-angle-double-up"></i> Previous Section</a>
+                                        <a class="btn btn-thin btn-default" ng-disabled="!vm.IsShowNextSection" ng-click="vm.NextSection()"> <i class="fa fa-angle-double-down"></i> Next Section</a>
+                                    </div>
                                 </div>
-                                <div id="popup-signature" kendo-window="vm.popupInstallSignature" k-width="700" k-modal="true" k-visible="false">
+
+                                <div id="popup-signature" kendo-window="vm.popupInstallSignature" k-width="600" k-modal="true" k-visible="false">
                                     <div class="row">
                                         <canvas ng-signature-pad="vm.mySign" width="590" height="300" style="border: 1px solid #000;"></canvas>
                                     </div>
@@ -543,21 +604,18 @@
                                     </div>
                                 </div>
                                 <div id="popup-save-data" kendo-window="vm.popupInstallSaveData" k-width="500" k-modal="true" k-visible="false">
-                                    <div class="row">
+                                    <div class="row" style="font-size: 16px;">
                                         <div class="form-group col-md-12 col-sm-12 col-xs-12">
                                             <div class="p0 col-md-12 col-sm-12 col-xs-12">
-                                                <label for="FileName">Name <span style="color: red">*</span></label>
-                                                <input id="FileName" type="text" maxlength="50" class="k-textbox" style="width: 100%;"
-                                                       ng-model="vm.AssessmentName" placeholder="Name" data-error="The Name is required." required>
-                                            </div>
-                                            <div class="p0 col-md-12 col-sm-12 col-xs-12" style="margin-top: 10px;">
-                                                <span id="error-message" style="color: red">The Name is required.</span>
+                                                Want to save your changes to this assessment?
                                             </div>
                                         </div>
                                     </div>
                                     <div class="popup-footer">
-                                        <button class="btn btn-primary mb0 pull-right" ng-click="vm.save()"><i class="fa fa-save"></i> Save</button>
-                                        <button class="btn btn-default mb0 pull-right" ng-click="vm.popupInstallSaveData.close()"><i class="fa fa-close"></i> Close</button>
+                                        <button ng-if="vm.isLoadingExecute"  class="btn btn-primary mb0 pull-right"><img src="waiting.gif" width="100" height="20"></button>
+                                        <button ng-if="!vm.isLoadingExecute" class="btn btn-primary mb0 pull-right" ng-click="vm.CloseAndSave()"><i class="fa fa-check"></i> Save</button>
+                                        <button ng-if="!vm.isLoadingExecute" class="btn btn-primary mb0 pull-right" ng-click="vm.CloseAndDontSave()"><i class="fa fa-check"></i> Don't Save</button>
+                                        <button ng-if="!vm.isLoadingExecute" class="btn btn-default mb0 pull-right" ng-click="vm.popupInstallSaveData.close()"><i class="fa fa-close"></i> Cancel</button>
                                     </div>
                                 </div>
                             </form>
@@ -572,11 +630,12 @@
 
     </div>
     <div class="popup-footer">
-    <!--<button class="btn btn-primary mb0" ng-click="Test()"><i class="fa fa-check"></i> Test</button>-->
-        <button class="btn btn-default mb0" onclick=" winformObj.cancel() "><i class="fa fa-close"></i> Close</button>
+        <!--<button class="btn btn-primary mb0" ng-click="Test()"><i class="fa fa-check"></i> Test</button>-->
+        <!--<button class="btn btn-default mb0" onclick=" winformObj.cancel() "><i class="fa fa-close"></i> Close</button>-->
+        <button class="btn btn-default mb0" ng-click="vm.CloseAndConfirm();"><i class="fa fa-close"></i> Close</button>
         <button ng-show="tabSelected == 2" class="btn btn-primary mb0" ng-click="vm.VerifyAll()"><i class="fa fa-check"></i> Verify All Sections</button>
         <button class="btn btn-primary mb0" ng-click="vm.Verify()"><i class="fa fa-check"></i> Verify</button>
-        <button class="btn btn-primary mb0" ng-click="vm.save()"><i class="fa fa-save"></i> Save</button>
+        <button class="btn btn-primary mb0" ng-click="vm.save(true)"><i class="fa fa-save"></i> Save</button>
     </div>
     <toaster-container toaster-options="{'position-class': 'toast-bottom-right','close-button':true, 'time-out': 3000 }"></toaster-container>
 
@@ -585,6 +644,12 @@
             $('#full-content').css('height', window.outerHeight - 50);
         });
         $('#full-content').css('height', window.outerHeight - 50);
+        $(document).ready(function () {
+            $("#content-section-div").css("height", $(window).height() - 238);
+            $(window).resize(function () {
+                $("#content-section-div").css("height", $(window).height() - 238);
+            });
+        });
     </script>
 </body>
 </html>

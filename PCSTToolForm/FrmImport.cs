@@ -53,19 +53,23 @@ namespace PCSTToolForm
             string encyptKey = ConfigurationManager.AppSettings["EncyptKey"];
             if (string.IsNullOrEmpty(encyptKey))
             {
-                MessageBox.Show("EncyptKey not found in App.config.", "Error");
+                MessageBox.Show("EncyptKey not found in App.config.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            else if (string.IsNullOrEmpty(txtFilePathImport.Text))
+            else if (string.IsNullOrEmpty(txtFilePathImport.Text.Trim()))
             {
-                MessageBox.Show("File path is required.", "Error");
+                MessageBox.Show("File path is required.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else if (!File.Exists(txtFilePathImport.Text))
             {
-                MessageBox.Show("File path can not found.", "Error");
+                MessageBox.Show("File path can not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            else if (string.IsNullOrEmpty(txtFileName.Text))
+            else if (string.IsNullOrEmpty(txtFileName.Text.Trim()))
             {
-                MessageBox.Show("File name is required.", "Error");
+                MessageBox.Show("File name is required.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else if (CheckNameExist(txtFileName.Text.Trim()))
+            {
+                MessageBox.Show("File name already existed in the system.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else
             {
@@ -87,6 +91,10 @@ namespace PCSTToolForm
             }
         }
 
-
+        private bool CheckNameExist(string fileName)
+        {
+            AssessmentService assessmentService = new AssessmentService();
+            return assessmentService.CheckNameExist(fileName);
+        }
     }
 }

@@ -30,8 +30,10 @@ namespace PCSTToolForm
         {
             InitializeComponent();
 
-            StartPosition = FormStartPosition.Manual;
-            Location = new Point(100, 50);
+            
+            //StartPosition = FormStartPosition.Manual;
+            //Location = new Point(100, 50);
+            this.WindowState = FormWindowState.Maximized;
             _assessmentId = assessmentId;
             _frmMain = frmMain;
 

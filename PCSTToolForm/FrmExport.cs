@@ -46,64 +46,74 @@ namespace PCSTToolForm
 
         private void btnExport_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(txtLocation.Text))
+            if (string.IsNullOrEmpty(txtLocation.Text.Trim()))
             {
-                MessageBox.Show("File path is required.", "Error");
+                MessageBox.Show("Save to is required.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else if (!Directory.Exists(txtLocation.Text))
             {
-                MessageBox.Show("File path not found.", "Error");
+                MessageBox.Show("Save to not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            else if (string.IsNullOrEmpty(txtFileName.Text))
+            else if (string.IsNullOrEmpty(txtFileName.Text.Trim()))
             {
-                MessageBox.Show("File name is required.", "Error");
+                MessageBox.Show("File name is required.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else if (!CaculatorHelper.CheckFileNameValid(txtFileName.Text))
             {
-                MessageBox.Show("File name is invalid.", "Error");
+                MessageBox.Show("File name is invalid.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else 
-            {
+            {           
                 string encyptKey = ConfigurationManager.AppSettings["EncyptKey"];
                 if (string.IsNullOrEmpty(encyptKey))
                 {
-                    throw new Exception("EncyptKey not found in App.config");
+                    MessageBox.Show("EncyptKey not found in App.config.", "Error", MessageBoxButtons.OK,MessageBoxIcon.Error);
                 }
-                string path = Path.Combine(txtLocation.Text, txtFileName.Text + ".backup");
-                var data = new ExportData
+                else
                 {
-                    AssessmentData = _assessment.AssessmentData,
-                    DisclosureFormData = _assessment.DisclosureFormData,
-                    MemberNumber = _assessment.Mid
+                    var export = true;
+              
+                    string path = Path.Combine(txtLocation.Text, txtFileName.Text + ".backup");
+                    var data = new ExportData
+                    {
+                        AssessmentData = _assessment.AssessmentData,
+                        DisclosureFormData = _assessment.DisclosureFormData,
+                        MemberNumber = _assessment.Mid
 
-                };
-                var json = JsonConvert.SerializeObject(data);
-                var decryptData = EncryptHelper.Encrypt(json, encyptKey);
+                    };
+                    var json = JsonConvert.SerializeObject(data);
+                    var decryptData = EncryptHelper.Encrypt(json, encyptKey);
 
-                var export = true;
-                if (File.Exists(path))
-                {
-                    DialogResult dialogResult = MessageBox.Show(
-                        "File exists in this folder. Do you want to replace it?", "Information", MessageBoxButtons.YesNo);
-                    if (dialogResult == DialogResult.Yes)
+                    if (File.Exists(path))
                     {
-                        export = true;
+                        DialogResult dialogResult = MessageBox.Show(
+                            "File exists in this folder. Do you want to replace it?", "Information",
+                            MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                        if (dialogResult == DialogResult.Yes)
+                        {
+                            if (File.Exists(path))
+                            {
+                                File.Delete(path);
+                            }
+                            export = true;
+                        }
+                        else if (dialogResult == DialogResult.No)
+                        {
+                            export = false;
+                        }
                     }
-                    else if (dialogResult == DialogResult.No)
+                    if (export)
                     {
-                        export = false;
+                        using (var fs = File.Open(path, FileMode.OpenOrCreate))
+                        {
+                            using (StreamWriter s = new StreamWriter(fs))
+                                s.WriteLine(decryptData);
+                        }
+                        MessageBox.Show("Export to file successfully!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        this.Close();
                     }
                 }
-                if (export)
-                {
-                    using (var fs = File.Open(path, FileMode.OpenOrCreate))
-                    {
-                        using (StreamWriter s = new StreamWriter(fs))
-                            s.WriteLine(decryptData);
-                    }
-                    MessageBox.Show("Export to file successfully!", "Information");
-                    this.Close();
-                }
+                
 
                
             }

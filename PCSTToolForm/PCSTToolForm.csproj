@@ -16,7 +16,7 @@
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
-    <NuGetPackageImportStamp>26476308</NuGetPackageImportStamp>
+    <NuGetPackageImportStamp>441396aa</NuGetPackageImportStamp>
     <CefSharpAnyCpuSupport>true</CefSharpAnyCpuSupport>
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>publish\</PublishUrl>
@@ -33,6 +33,7 @@
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -209,6 +210,7 @@
     <Compile Include="SelfHost\Controller\FrequencyController.cs" />
     <Compile Include="SelfHost\Controller\RouteController.cs" />
     <Compile Include="SelfHost\Startup.cs" />
+    <Compile Include="Update\WebApiConnect.cs" />
     <EmbeddedResource Include="FrmExport.resx">
       <DependentUpon>FrmExport.cs</DependentUpon>
     </EmbeddedResource>
@@ -436,15 +438,25 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Resource\waiting.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="Resources\1486983585_export.ico" />
     <Content Include="icontool.ico" />
+    <Content Include="PcstVersion.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\cancel.png" />
     <None Include="Resources\cancel1.png" />
+    <Content Include="Resources\icontool.ico" />
     <Content Include="Resources\import.png" />
     <None Include="Resources\import1.png" />
     <None Include="Resources\Low Importance_2.png" />
     <None Include="Resources\ok.png" />
     <Content Include="Resource\default.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\pcst\pcstTemp.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resource\toastr\toaster.css">
@@ -2872,19 +2884,19 @@
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+    <Error Condition="!Exists('..\packages\System.Data.SQLite.Core.1.0.104.0\build\net451\System.Data.SQLite.Core.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\System.Data.SQLite.Core.1.0.104.0\build\net451\System.Data.SQLite.Core.targets'))" />
     <Error Condition="!Exists('..\packages\cef.redist.x86.3.2785.1486\build\cef.redist.x86.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\cef.redist.x86.3.2785.1486\build\cef.redist.x86.targets'))" />
     <Error Condition="!Exists('..\packages\cef.redist.x64.3.2785.1486\build\cef.redist.x64.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\cef.redist.x64.3.2785.1486\build\cef.redist.x64.targets'))" />
     <Error Condition="!Exists('..\packages\CefSharp.Common.53.0.1\build\CefSharp.Common.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\CefSharp.Common.53.0.1\build\CefSharp.Common.props'))" />
     <Error Condition="!Exists('..\packages\CefSharp.Common.53.0.1\build\CefSharp.Common.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\CefSharp.Common.53.0.1\build\CefSharp.Common.targets'))" />
     <Error Condition="!Exists('..\packages\CefSharp.WinForms.53.0.1\build\CefSharp.WinForms.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\CefSharp.WinForms.53.0.1\build\CefSharp.WinForms.props'))" />
     <Error Condition="!Exists('..\packages\CefSharp.WinForms.53.0.1\build\CefSharp.WinForms.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\CefSharp.WinForms.53.0.1\build\CefSharp.WinForms.targets'))" />
-    <Error Condition="!Exists('..\packages\System.Data.SQLite.Core.1.0.104.0\build\net451\System.Data.SQLite.Core.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\System.Data.SQLite.Core.1.0.104.0\build\net451\System.Data.SQLite.Core.targets'))" />
   </Target>
+  <Import Project="..\packages\System.Data.SQLite.Core.1.0.104.0\build\net451\System.Data.SQLite.Core.targets" Condition="Exists('..\packages\System.Data.SQLite.Core.1.0.104.0\build\net451\System.Data.SQLite.Core.targets')" />
   <Import Project="..\packages\cef.redist.x86.3.2785.1486\build\cef.redist.x86.targets" Condition="Exists('..\packages\cef.redist.x86.3.2785.1486\build\cef.redist.x86.targets')" />
   <Import Project="..\packages\cef.redist.x64.3.2785.1486\build\cef.redist.x64.targets" Condition="Exists('..\packages\cef.redist.x64.3.2785.1486\build\cef.redist.x64.targets')" />
   <Import Project="..\packages\CefSharp.Common.53.0.1\build\CefSharp.Common.targets" Condition="Exists('..\packages\CefSharp.Common.53.0.1\build\CefSharp.Common.targets')" />
   <Import Project="..\packages\CefSharp.WinForms.53.0.1\build\CefSharp.WinForms.targets" Condition="Exists('..\packages\CefSharp.WinForms.53.0.1\build\CefSharp.WinForms.targets')" />
-  <Import Project="..\packages\System.Data.SQLite.Core.1.0.104.0\build\net451\System.Data.SQLite.Core.targets" Condition="Exists('..\packages\System.Data.SQLite.Core.1.0.104.0\build\net451\System.Data.SQLite.Core.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

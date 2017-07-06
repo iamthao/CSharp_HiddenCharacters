@@ -29,6 +29,16 @@ namespace PCSTToolForm.SelfHost.Controller
             ProviderService providerService = new ProviderService();
             var data = providerService.GetListProvider(query);
             return Ok(data);
-        }  
+        }
+
+        [HttpPost]
+        [Route("GetProviderFromName")]
+        public IHttpActionResult GetProviderFromName([FromBody] string nameJson)
+        {
+            var dataJson = EncryptHelper.Base64Decode(nameJson);
+            ProviderService providerService = new ProviderService();
+            var data = providerService.GetProviderFromName(dataJson);
+            return Ok(data);
+        }
     }
 }

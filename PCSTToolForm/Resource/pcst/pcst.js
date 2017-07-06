@@ -95,21 +95,21 @@ app.controller('PcstController', ['$q', '$scope', '$http', '$timeout', '$sce', '
         $("#OtherHealthcareProfessionalFax").mask(format);
     };
     subMarkPhone();
-     function returnNowStr() {
-         var today = new Date();
-         var dd = today.getDate();
-         var mm = today.getMonth() + 1; //January is 0!
-         var yyyy = today.getFullYear();
+    function returnNowStr() {
+        var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth() + 1; //January is 0!
+        var yyyy = today.getFullYear();
 
-         if (dd < 10) {
-             dd = '0' + dd
-         }
+        if (dd < 10) {
+            dd = '0' + dd
+        }
 
-         if (mm < 10) {
-             mm = '0' + mm
-         }
-         return mm + '/' + dd + '/' + yyyy;
-     }
+        if (mm < 10) {
+            mm = '0' + mm
+        }
+        return mm + '/' + dd + '/' + yyyy;
+    }
     function checkDateValid(value) {
         var valueField = value;
         if (value == null || value == undefined) {
@@ -150,6 +150,12 @@ app.controller('PcstController', ['$q', '$scope', '$http', '$timeout', '$sce', '
             vm.widthCanvasGua = $("#PhysicianName").width() * 1.5;
         });
 
+
+        $scope.Test = function () {
+            console.log(vm.GuardianSignatureIsEmpty);
+            console.log(vm.guardianSignature.isEmpty());
+            console.log(vm.guardianSignature.toDataURL());
+        }
         $http.get('http://localhost:9000/api/Assessment?id=' + assessmentId).then(function (result) {
             if (result && result.data) {
                 vm.RequestNo = result.data.RequestNo;
@@ -160,18 +166,19 @@ app.controller('PcstController', ['$q', '$scope', '$http', '$timeout', '$sce', '
                 //console.log(result.data)
                 $timeout(function () {
                     if (vm.DisclosureForm != null) {
-                        if (vm.DisclosureForm.Guardian != undefined && vm.DisclosureForm.Guardian != null
-                            && vm.DisclosureForm.Guardian.Signature != undefined && vm.DisclosureForm.Guardian.Signature != null) {
-                            vm.guardianSignature.fromDataURL(vm.DisclosureForm.Guardian.Signature);
-                            vm.IsCheckGuardianSignature = 1;
-                            if (vm.DisclosureForm.Guardian.Signature == "_blank") {
-                                vm.GuardianSignatureIsEmpty = true;
-                            } else {
+                        if (vm.DisclosureForm.Guardian != undefined && vm.DisclosureForm.Guardian != null) {
+                            if (vm.DisclosureForm.Guardian.Signature != undefined && vm.DisclosureForm.Guardian.Signature != null) {
+                                vm.guardianSignature.fromDataURL(vm.DisclosureForm.Guardian.Signature);
                                 vm.GuardianSignatureIsEmpty = false;
+                                vm.IsCheckGuardianSignature = 1;
+                            } else {
+                                vm.GuardianSignatureIsEmpty = true;
                             }
-                        } else {
+                        }
+                        else {
                             vm.DisclosureForm.Guardian = {};
                         }
+
                         if (vm.DisclosureForm.Member != undefined && vm.DisclosureForm.Member != null) {
                             if (vm.DisclosureForm.Member.Signature != undefined && vm.DisclosureForm.Member.Signature != null) {
                                 vm.memberSignature.fromDataURL(vm.DisclosureForm.Member.Signature);
@@ -209,7 +216,7 @@ app.controller('PcstController', ['$q', '$scope', '$http', '$timeout', '$sce', '
                             initProvider();
                         }
 
-                        if (vm.DisclosureForm.OtherHealthcareProfessional != undefined && vm.DisclosureForm.OtherHealthcareProfessional != null) {                          
+                        if (vm.DisclosureForm.OtherHealthcareProfessional != undefined && vm.DisclosureForm.OtherHealthcareProfessional != null) {
 
                         } else {
                             vm.DisclosureForm.OtherHealthcareProfessional = {};
@@ -335,15 +342,15 @@ app.controller('PcstController', ['$q', '$scope', '$http', '$timeout', '$sce', '
     function initProvider() {
         vm.DisclosureForm.Providers.forEach(function (item) {
             if (item.Order == 1) {
-                vm.AgencyId = item.Id;
+                vm.AgencyId = item.Mpi;
                 vm.AgencyName = item.Name;
             }
             else if (item.Order == 2) {
-                vm.Agency2Id = item.Id;
+                vm.Agency2Id = item.Mpi;
                 vm.Agency2Name = item.Name;
             }
             else if (item.Order == 3) {
-                vm.Agency3Id = item.Id;
+                vm.Agency3Id = item.Mpi;
                 vm.Agency3Name = item.Name;
             }
         });
@@ -412,14 +419,10 @@ app.controller('PcstController', ['$q', '$scope', '$http', '$timeout', '$sce', '
     vm.GuardianSignatureIsEmpty = true;
     vm.IsCheckGuardianSignature = 0;
     vm.GuardianIsRequired = false;
-    $scope.Test = function () {
-        console.log(vm.GuardianSignatureIsEmpty);
-        console.log(vm.guardianSignature.isEmpty());
-        console.log(vm.guardianSignature.toDataURL());
-    }
-    var checkGuardianHadBeenFilleds = function () {    
+
+    var checkGuardianHadBeenFilleds = function () {
         if (vm.DisclosureForm.Guardian != null) {
-            if ((vm.DisclosureForm.Guardian.Name != null && vm.DisclosureForm.Guardian.Name!= undefined && vm.DisclosureForm.Guardian.Name!= "")
+            if ((vm.DisclosureForm.Guardian.Name != null && vm.DisclosureForm.Guardian.Name != undefined && vm.DisclosureForm.Guardian.Name != "")
                 || (vm.DisclosureForm.Guardian.Relationship != null && vm.DisclosureForm.Guardian.Relationship != undefined && vm.DisclosureForm.Guardian.Relationship != "")
                 || !vm.GuardianSignatureIsEmpty) {
                 return true;
@@ -427,7 +430,7 @@ app.controller('PcstController', ['$q', '$scope', '$http', '$timeout', '$sce', '
         } else {
             return false;
         }
-        
+
     }
     $scope.$watch('vm.IsCheckGuardianSignature', function (n, o) {
         if (n != o) {
@@ -490,7 +493,68 @@ app.controller('PcstController', ['$q', '$scope', '$http', '$timeout', '$sce', '
         }
     });
 
+    var agency1TextOld = "";
+    $("#Agency1").blur(function () {
+        var newText = $("#Agency1").val();
+        if (newText != agency1TextOld && newText.trim() != '') {
+            agency1TextOld = newText;
+            $http.post("http://localhost:9000/api/Provider/GetProviderFromName", JSON.stringify(Base64.encode(newText))).then(function (result) {
+                console.log("1", result.data)
+                if (result.data != undefined && result.data.Id != null) {
+                    $scope.OrderProvider = 1;
+                    setAgainProvider(result.data);
+                } else {
+                    $("#Agency1").val("");
+                    var error = [];
+                    error.push({ MessageError: "Provider not found." });
+                    vm.ShowErrorInValid(error);
+                }
+            });
+        }
+    });
+
+    var agency2TextOld = "";
+    $("#Agency2").blur(function () {
+        var newText = $("#Agency2").val();
+        if (newText != agency2TextOld && newText.trim() != '') {
+            agency2TextOld = newText;
+            $http.post("http://localhost:9000/api/Provider/GetProviderFromName", JSON.stringify(Base64.encode(newText))).then(function (result) {
+                console.log("2", result.data)
+                if (result.data != undefined && result.data.Id != null) {
+                    $scope.OrderProvider = 2;
+                    setAgainProvider(result.data);
+                } else {
+                    $("#Agency2").val("");
+                    var error = [];
+                    error.push({ MessageError: "Provider not found." });
+                    vm.ShowErrorInValid(error);
+                }
+            });
+        }
+    });
+
+    var agency3TextOld = "";
+    $("#Agency3").blur(function () {
+        var newText = $("#Agency3").val();
+        if (newText != agency3TextOld && newText.trim() != '') {
+            agency3TextOld = newText;
+            $http.post("http://localhost:9000/api/Provider/GetProviderFromName", JSON.stringify(Base64.encode(newText))).then(function (result) {
+                console.log("3", result.data)
+                if (result.data != undefined && result.data.Id != null) {
+                    $scope.OrderProvider = 3;
+                    setAgainProvider(result.data);
+                } else {
+                    $("#Agency3").val("");
+                    var error = [];
+                    error.push({ MessageError: "Provider not found." });
+                    vm.ShowErrorInValid(error);
+                }
+            });
+        }
+    });
+
     function setAgainProvider(item) {
+       
         if ($scope.OrderProvider == 1) {
             vm.AgencyId = item.Id;
             vm.AgencyName = item.Name;
@@ -498,11 +562,13 @@ app.controller('PcstController', ['$q', '$scope', '$http', '$timeout', '$sce', '
             if (vm.Agency2Id == item.Id) {
                 vm.Agency2Id = null;
                 vm.Agency2Name = "";
+                agency2TextOld = "";
             }
 
             if (vm.Agency3Id == item.Id) {
                 vm.Agency3Id = null;
                 vm.Agency3Name = "";
+                agency3TextOld = "";
             }
         }
         else if ($scope.OrderProvider == 2) {
@@ -512,11 +578,13 @@ app.controller('PcstController', ['$q', '$scope', '$http', '$timeout', '$sce', '
             if (vm.AgencyId == item.Id) {
                 vm.AgencyId = null;
                 vm.AgencyName = "";
+                agency1TextOld = "";
             }
 
             if (vm.Agency3Id == item.Id) {
                 vm.Agency3Id = null;
                 vm.Agency3Name = "";
+                agency3TextOld = "";
             }
         }
         else {
@@ -526,13 +594,15 @@ app.controller('PcstController', ['$q', '$scope', '$http', '$timeout', '$sce', '
             if (vm.AgencyId == item.Id) {
                 vm.AgencyId = null;
                 vm.AgencyName = "";
+                agency1TextOld = "";
             }
 
             if (vm.Agency2Id == item.Id) {
                 vm.Agency2Id = null;
                 vm.Agency2Name = "";
+                agency2TextOld = "";
             }
-        }   
+        }
     }
 
     function installGridProvider() {
@@ -542,7 +612,7 @@ app.controller('PcstController', ['$q', '$scope', '$http', '$timeout', '$sce', '
             vm.popupInstallSelectProvider.open();
         }
 
-        vm.returnSelectProvider = function (item) {     
+        vm.returnSelectProvider = function (item) {
             setAgainProvider(item);
             vm.popupInstallSelectProvider.close();
         };
@@ -1344,7 +1414,7 @@ app.controller('PcstController', ['$q', '$scope', '$http', '$timeout', '$sce', '
                 bindingEventInList($(this));
             });
         }
-        
+
     }
 
     function getIndexIdInList(idAttr, i) {
@@ -1921,8 +1991,20 @@ app.controller('PcstController', ['$q', '$scope', '$http', '$timeout', '$sce', '
             $('table#content-section input#Order33-Field01').attr('value', item.ClinicName);
             $('table#content-section input#Order33-Field01').val(item.ClinicName);
 
-            $('table#content-section input#Order33-Field02').attr('value', item.FullAddress);
-            $('table#content-section input#Order33-Field02').val(item.FullAddress);
+            $('table#content-section input#Order33-Field02').attr('value', item.Address1);
+            $('table#content-section input#Order33-Field02').val(item.Address1);
+
+            $('table#content-section input#Order33-Field03').attr('value', item.Address2);
+            $('table#content-section input#Order33-Field03').val(item.Address2);
+
+            $('table#content-section input#Order33-Field04').attr('value', item.Zip);
+            $('table#content-section input#Order33-Field04').val(item.Zip);
+
+            $('table#content-section input#Order33-Field05').attr('value', item.City);
+            $('table#content-section input#Order33-Field05').val(item.City);
+
+            $('table#content-section input#Order33-Field06').attr('value', item.State);
+            $('table#content-section input#Order33-Field06').val(item.State);
 
 
             vm.popupInstallSelectPhysician.close();
@@ -2423,8 +2505,8 @@ app.controller('PcstController', ['$q', '$scope', '$http', '$timeout', '$sce', '
                 vm.ShowErrorInValid(result.data.Error);
             } else {
                 $(".loader").fadeOut();
-                winformObj.cancel();               
-            }         
+                winformObj.cancel();
+            }
         });
     }
     vm.saveWithDemoData = function () {
@@ -2483,7 +2565,7 @@ app.controller('PcstController', ['$q', '$scope', '$http', '$timeout', '$sce', '
         var encodeData = JSON.stringify(Base64.encode(angular.toJson(data)));
         $http.post('http://localhost:9000/api/Assessment/Save', encodeData).then(function (result) {
             deferred.resolve(result);
-            vm.AssessmentPcsId = result.data.Id;            
+            vm.AssessmentPcsId = result.data.Id;
         });
         return deferred.promise;
     }
@@ -2529,7 +2611,7 @@ app.controller('PcstController', ['$q', '$scope', '$http', '$timeout', '$sce', '
                     vm.popupInstallSignature.close();
                 } else {
                     var error = [];
-                    error.push({MessageError:"Signature is required."});
+                    error.push({ MessageError: "Signature is required." });
                     vm.ShowErrorInValid(error);
                 }
             };
@@ -2539,7 +2621,7 @@ app.controller('PcstController', ['$q', '$scope', '$http', '$timeout', '$sce', '
             vm.popupInstallSignature.bind('open', function () {
                 if (getSign() != undefined && getSign() != "") {
                     vm.mySign.fromDataURL(getSign());
-                }               
+                }
             });
 
 
@@ -2572,7 +2654,6 @@ app.controller('PcstController', ['$q', '$scope', '$http', '$timeout', '$sce', '
 
             });
             vm.popupInstallSaveData.save = function () {
-                console.log("voo save")
             };
 
         }

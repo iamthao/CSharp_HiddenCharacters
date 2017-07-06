@@ -26,13 +26,13 @@ namespace PCSTToolForm
 
         private void btnImport_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(txtFilePath.Text))
+            if (string.IsNullOrEmpty(txtFilePath.Text.Trim()))
             {
-                MessageBox.Show("File path is required.", "Error");
+                MessageBox.Show("File path is required.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else if (!File.Exists(txtFilePath.Text))
             {
-                MessageBox.Show("File path not found.", "Error");
+                MessageBox.Show("File path not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else
             {
@@ -44,7 +44,7 @@ namespace PCSTToolForm
                 File.Copy(txtFilePath.Text, pathFileDataDefault);
                 if (File.Exists(pathFileDataDefault))
                 {
-                    MessageBox.Show("Import successfully!", "Information");
+                    MessageBox.Show("Import successfully!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     this.Close();
                 }
             }

@@ -40,7 +40,7 @@
             this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FilePath = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.btnImportDataDefault = new System.Windows.Forms.Button();
+            this.btnUpdateNewVersion = new System.Windows.Forms.Button();
             this.btnImportAssessment = new System.Windows.Forms.Button();
             this.btnCreate = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -55,9 +55,10 @@
             this.bindingNavigatorSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.bindingNavigatorMoveNextItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripComboBox1 = new System.Windows.Forms.ToolStripComboBox();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.bwCheckUpdate = new System.ComponentModel.BackgroundWorker();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAssessment)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -163,7 +164,7 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.btnImportDataDefault);
+            this.panel1.Controls.Add(this.btnUpdateNewVersion);
             this.panel1.Controls.Add(this.btnImportAssessment);
             this.panel1.Controls.Add(this.btnCreate);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
@@ -172,18 +173,19 @@
             this.panel1.Size = new System.Drawing.Size(836, 44);
             this.panel1.TabIndex = 3;
             // 
-            // btnImportDataDefault
+            // btnUpdateNewVersion
             // 
-            this.btnImportDataDefault.Image = global::PCSTToolForm.Properties.Resources.Low_Importance_2;
-            this.btnImportDataDefault.Location = new System.Drawing.Point(680, 4);
-            this.btnImportDataDefault.Name = "btnImportDataDefault";
-            this.btnImportDataDefault.Size = new System.Drawing.Size(146, 37);
-            this.btnImportDataDefault.TabIndex = 1;
-            this.btnImportDataDefault.Text = "Import Data Default";
-            this.btnImportDataDefault.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnImportDataDefault.UseMnemonic = false;
-            this.btnImportDataDefault.UseVisualStyleBackColor = true;
-            this.btnImportDataDefault.Click += new System.EventHandler(this.btnImportDataDefault_Click);
+            this.btnUpdateNewVersion.Enabled = false;
+            this.btnUpdateNewVersion.Image = global::PCSTToolForm.Properties.Resources.Low_Importance_2;
+            this.btnUpdateNewVersion.Location = new System.Drawing.Point(680, 4);
+            this.btnUpdateNewVersion.Name = "btnUpdateNewVersion";
+            this.btnUpdateNewVersion.Size = new System.Drawing.Size(146, 37);
+            this.btnUpdateNewVersion.TabIndex = 1;
+            this.btnUpdateNewVersion.Text = "Update New Version";
+            this.btnUpdateNewVersion.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnUpdateNewVersion.UseMnemonic = false;
+            this.btnUpdateNewVersion.UseVisualStyleBackColor = true;
+            this.btnUpdateNewVersion.Click += new System.EventHandler(this.btnUpdateNewVersion_Click);
             // 
             // btnImportAssessment
             // 
@@ -335,6 +337,11 @@
             this.bindingNavigatorMoveLastItem.Text = "Move last";
             this.bindingNavigatorMoveLastItem.Click += new System.EventHandler(this.bindingNavigatorMoveLastItem_Click);
             // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 29);
+            // 
             // toolStripComboBox1
             // 
             this.toolStripComboBox1.Name = "toolStripComboBox1";
@@ -347,10 +354,10 @@
             this.toolStripLabel1.Size = new System.Drawing.Size(85, 26);
             this.toolStripLabel1.Text = "items per page";
             // 
-            // toolStripSeparator1
+            // bwCheckUpdate
             // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 29);
+            this.bwCheckUpdate.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bwCheckUpdate_DoWork);
+            this.bwCheckUpdate.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bwCheckUpdate_RunWorkerCompleted);
             // 
             // FrmMain
             // 
@@ -396,7 +403,7 @@
         private System.Windows.Forms.ToolStripButton bindingNavigatorMoveNextItem;
         private System.Windows.Forms.ToolStripButton bindingNavigatorMoveLastItem;
         private System.Windows.Forms.Button btnImportAssessment;
-        private System.Windows.Forms.Button btnImportDataDefault;
+        private System.Windows.Forms.Button btnUpdateNewVersion;
         private System.Windows.Forms.ToolStripComboBox toolStripComboBox1;
         private System.Windows.Forms.DataGridViewTextBoxColumn FileName;
         private System.Windows.Forms.DataGridViewTextBoxColumn CreatedOn;
@@ -408,5 +415,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn FilePath;
         private System.Windows.Forms.ToolStripLabel toolStripLabel1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.ComponentModel.BackgroundWorker bwCheckUpdate;
     }
 }

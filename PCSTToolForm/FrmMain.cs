@@ -2,7 +2,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -13,9 +15,14 @@ using System.Windows.Forms;
 using CefSharp;
 using CefSharp.WinForms;
 using Microsoft.Owin.Hosting;
+using Newtonsoft.Json;
 using PcstLib.Services;
 using PcstLib.Sqlite;
+using PcstLib.Sqlite.Entities;
+using PcstLib.Sqlite.ValueObject;
+using PcstLib.Utility;
 using PCSTToolForm.SelfHost;
+using PCSTToolForm.Update;
 
 namespace PCSTToolForm
 {
@@ -25,27 +32,64 @@ namespace PCSTToolForm
         private const int pageSize = 20;
         private readonly AssessmentService _assessmentService = new AssessmentService();
         readonly BindingSource bs = new BindingSource();
+        private bool _autoUpdate = true;
 
         //delegate void UpdateGridHandler();
         private string pathFileScriptTemp = Directory.GetCurrentDirectory() + "\\Resource\\pcst\\pcstTemp.js";
+        private string pathFileScriptSource = Directory.GetCurrentDirectory() + "\\Resource\\pcst\\pcst.js";
+        private System.Windows.Forms.Timer CheckUpdateTimer = new System.Windows.Forms.Timer();
         public FrmMain()
         {
-            //If File Temp not exist is copy (the first)
-            if (File.Exists(pathFileScriptTemp))
+            var url = "";
+            string urlWeb = ConfigurationManager.AppSettings["UrlWeb"];
+            if (!string.IsNullOrEmpty(urlWeb))
             {
-                File.Delete(pathFileScriptTemp);
+                url = urlWeb;
+            }
+            //If File Temp not exist is copy (the first)
+            if (!File.Exists(pathFileScriptTemp))
+            {
+                File.Copy(pathFileScriptSource, pathFileScriptTemp);
+            }
+
+            string pcstVersionPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "PcstVersion.txt");
+            var currentVersion = "1.0.0.0";
+            if (File.Exists(pcstVersionPath))
+            {
+                currentVersion = File.ReadAllText(pcstVersionPath);
             }
 
             InitializeComponent();
+            this.Text = "PCST Tool v" + currentVersion + " - " + url;
+
+            bwCheckUpdate.RunWorkerAsync();
+            CheckUpdateTimer.Tick += CheckUpdateTimer_Tick;
+            CheckUpdateTimer.Interval = 5*60*1000;//5 minutes
+            CheckUpdateTimer.Start();
+        }
+
+        void CheckUpdateTimer_Tick(object sender, EventArgs e)
+        {
+            if(!bwCheckUpdate.IsBusy)
+                bwCheckUpdate.RunWorkerAsync();
         }
 
         private string _baseAddress = "http://localhost";
         private string _port = "9000";
-        private void SelfHost()
+        private bool SelfHost()
         {
-            string baseAddress = _baseAddress + ":" + _port + "/";
-            // Start OWIN host 
-            var api = WebApp.Start<Startup>(url: baseAddress);
+            try
+            {
+                string baseAddress = _baseAddress + ":" + _port + "/";
+                // Start OWIN host 
+                var api = WebApp.Start<Startup>(url: baseAddress);
+                return true;
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("The default port " + _port + " was occupied by some other application!", "Error");
+                return false;
+            }
         }
         //public ChromiumWebBrowser chromeBrowser;
 
@@ -64,9 +108,9 @@ namespace PCSTToolForm
         private void btnCreate_Click(object sender, EventArgs e)
         {
             var form = new FrmInputName(this);
-            form.FormBorderStyle = FormBorderStyle.FixedDialog;
-            form.StartPosition = FormStartPosition.CenterParent;
-            form.ShowDialog(this);
+            //form.FormBorderStyle = FormBorderStyle.FixedDialog;
+            //form.StartPosition = FormStartPosition.CenterParent;
+            form.Show(this);
 
             //var form = new FrmPcstForm(0,this);
             //form.Show();
@@ -74,8 +118,10 @@ namespace PCSTToolForm
 
         private void FrmMain_Load(object sender, EventArgs e)
         {
-            SelfHost();
-            InitDataForGrid();
+            if(SelfHost())
+                InitDataForGrid();
+            else
+                Close();
         }
 
         public class CbbPageSize
@@ -152,12 +198,77 @@ namespace PCSTToolForm
 
         private void ExportAssessment(int assessmentId)
         {
+            string encyptKey = ConfigurationManager.AppSettings["EncyptKey"];
+            if (string.IsNullOrEmpty(encyptKey))
+            {
+                throw new Exception("EncyptKey not found in App.config");
+            }
+
             var assessment = _assessmentService.GetById(assessmentId);
             if (assessment != null)
             {
-                var form = new FrmExport(assessment);
-                form.ShowDialog();
+                var isShowExportForm = true;
+                var listError = new List<MessageErrorVo>();
+
+                var dataJsonDiscloseData = new DisclosureFormVo();
+                var dataJsonAssessment = new AssessmentDataVo();
+
+                if (string.IsNullOrEmpty(assessment.DisclosureFormData))
+                {
+                    isShowExportForm = false;
+                    var errorMsg = "To export assessment, please input data fully to Disclosure Form.\n";                    
+                    MessageBox.Show(errorMsg, "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+                else if (!string.IsNullOrEmpty(assessment.DisclosureFormData))
+                {
+                    var decryptDiscloseData = EncryptHelper.Decrypt(assessment.DisclosureFormData, encyptKey);
+                    dataJsonDiscloseData = JsonConvert.DeserializeObject<DisclosureFormVo>(decryptDiscloseData);
+
+                    if (!string.IsNullOrEmpty(assessment.AssessmentData))
+                    {
+                        var decryptAssessment = EncryptHelper.Decrypt(assessment.AssessmentData, encyptKey);
+                        dataJsonAssessment = JsonConvert.DeserializeObject<AssessmentDataVo>(decryptAssessment);
+                    }
+
+                    var listErrorDisclosureForm = _assessmentService.CheckInValidDisclosureForm(dataJsonDiscloseData);
+                    listError = _assessmentService.CheckInValidBeforeExport(dataJsonDiscloseData, dataJsonAssessment);
+
+                    if (listErrorDisclosureForm != null && listErrorDisclosureForm.Count > 0)
+                    {
+                        if (listError != null && listError.Count > 0)
+                        {
+                            listErrorDisclosureForm.AddRange(listError);
+                        }
+                        isShowExportForm = false;
+                        var errorMsg = "To export assessment, please input data fully to Disclosure Form.\n" +
+                                      "Following business rules are failed:\n";
+                        foreach (var item in listErrorDisclosureForm)
+                        {
+                            errorMsg += " - " + item.MessageError.Replace("(Disclosure Form)", "") + "\n";
+                        }
+                        MessageBox.Show(errorMsg, "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }                   
+                    else if (listError != null && listError.Count > 0)
+                    {
+                        isShowExportForm = false;
+                        var errorMsg = "Following business rules are failed:\n";
+                        foreach (var item in listError)
+                        {
+                            errorMsg += " - " + item.MessageError.Replace("(Disclosure Form)", "") + "\n";
+                        }
+                        MessageBox.Show(errorMsg, "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+
+                }
+                
+                if (isShowExportForm)
+                {
+                    var form = new FrmExport(assessment);
+                    form.ShowDialog();
+                }
+                
             }
+            
 
         }
 
@@ -248,14 +359,6 @@ namespace PCSTToolForm
         public void RefreshDataForGridFromAnotherForm()
         {
             LoadAssessmentGrid();
-        }
-
-        private void btnImportDataDefault_Click(object sender, EventArgs e)
-        {
-            FrmImportDataDefault import = new FrmImportDataDefault();
-            import.FormBorderStyle = FormBorderStyle.FixedDialog;
-            import.StartPosition = FormStartPosition.CenterParent;
-            import.ShowDialog(this);
         }
 
         private void dgvAssessment_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -355,6 +458,69 @@ namespace PCSTToolForm
             page = bs.Position;
             bs_PositionChanged(bs, EventArgs.Empty);
         }
+        
         //End
+
+        private void bwCheckUpdate_DoWork(object sender, DoWorkEventArgs e)
+        {
+            try
+            {
+                string updatePcstApi = ConfigurationManager.AppSettings["UpdatePcstApi"];
+                if (!string.IsNullOrEmpty(updatePcstApi))
+                {
+                    var webApiConnect = new WebApiConnect(updatePcstApi);
+                    var objVersion = webApiConnect.SendMessageToWebApi("GetPcstVersion", null);
+                    var version = (string) objVersion;
+
+                    var oldVersion = "1.0.0.0";
+                    string pcstVersionPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "PcstVersion.txt");
+                    if (File.Exists(pcstVersionPath))
+                    {
+                        oldVersion = File.ReadAllText(pcstVersionPath);
+                    }
+                    if (!version.Equals(oldVersion))
+                    {
+                        e.Result = 1;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                
+            }
+            
+        }
+
+        private void bwCheckUpdate_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            if (e.Result != null && (int)e.Result == 1)
+            {
+                btnUpdateNewVersion.Enabled = true;
+                if (Application.OpenForms.Count == 1 && Application.OpenForms.OfType<FrmMain>().Any() && _autoUpdate)
+                {
+                    //auto update
+                    btnUpdateNewVersion_Click(null, null);
+                }
+            }
+            _autoUpdate = false;
+        }
+
+        private void btnUpdateNewVersion_Click(object sender, EventArgs e)
+        {
+            string pcstUpdateName = "PcstUpdate.exe";
+            string pcstUpdateDir = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "PcstUpdate");
+            var pcstUpdate = Path.Combine(pcstUpdateDir, pcstUpdateName);
+            if (File.Exists(pcstUpdate))
+            {
+                var processInfo = new ProcessStartInfo
+                {
+                    FileName = pcstUpdateName,
+                    WorkingDirectory = pcstUpdateDir
+                };
+                Process.Start(processInfo);
+                CheckUpdateTimer.Dispose();
+                Close();
+            }
+        }
     }
 }
