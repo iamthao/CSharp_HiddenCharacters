@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Configuration;
+using CreateFile.Ultilities;
 
 namespace CreateFile.GendataDefault
 {
@@ -96,11 +97,11 @@ namespace CreateFile.GendataDefault
 
         private static void Generate()
         {
+            RunRoute();
             RunPrimaryLanguage();
             RunCounty();
             RunIcd();
             RunNpi();
-            RunRoute();
             RunFrequency();
             RunSection();
             RunSectionQuestion();
@@ -110,7 +111,8 @@ namespace CreateFile.GendataDefault
 
         #region
         private static void RunPrimaryLanguage()
-        {        
+        {
+            var dataText = "";
             using (var mysqlProvider = new MySqlDataProvider(_connectionString))
             {
                 string script = string.Empty, strScriptSqlite = string.Empty;
@@ -127,6 +129,8 @@ namespace CreateFile.GendataDefault
                         strScriptSqlite = ScriptSqliteHelper.InsertLanguageSchedule + table.GetScript(ScriptSqliteHelper.InsertLanguageValue, 3);
                         GenerateScriptHelper.SaveSqliteDb(strScriptSqlite, _saveTo);
                         _skip += Take;
+
+                        dataText = dataText + table.GetScript(ScriptSqliteHelper.InsertLanguageValue, 3);
                     }
                 }
                 else
@@ -137,13 +141,17 @@ namespace CreateFile.GendataDefault
                     GenerateScriptHelper.SaveSqliteDb(ScriptSqliteHelper.TableLanguage, _saveTo);
                     strScriptSqlite = ScriptSqliteHelper.InsertLanguageSchedule + table.GetScript(ScriptSqliteHelper.InsertLanguageValue, 3);
                     GenerateScriptHelper.SaveSqliteDb(strScriptSqlite, _saveTo);
-                }
 
+                    dataText = dataText + table.GetScript(ScriptSqliteHelper.InsertLanguageValue, 3);
+                }
             }
+
+            FileHelper.WriteFileInFolderLogFileTableDatabase("PrimaryLanguage_New.txt", dataText);
         }
 
         private static void RunCounty()
-        {           
+        {
+            var dataText = "";
             using (var mysqlProvider = new MySqlDataProvider(_connectionString))
             {
                 string script, strScriptSqlite;
@@ -160,6 +168,8 @@ namespace CreateFile.GendataDefault
                         strScriptSqlite = ScriptSqliteHelper.InsertCountySchedule + table.GetScript(ScriptSqliteHelper.InsertCountyValue, 3);
                         GenerateScriptHelper.SaveSqliteDb(strScriptSqlite, _saveTo);
                         _skip += Take;
+
+                        dataText = dataText + table.GetScript(ScriptSqliteHelper.InsertCountyValue, 3);
                     }
                 }
                 else
@@ -169,13 +179,17 @@ namespace CreateFile.GendataDefault
                     GenerateScriptHelper.SaveSqliteDb(ScriptSqliteHelper.TableCounty, _saveTo);
                     strScriptSqlite = ScriptSqliteHelper.InsertCountySchedule + table.GetScript(ScriptSqliteHelper.InsertCountyValue, 3);
                     GenerateScriptHelper.SaveSqliteDb(strScriptSqlite, _saveTo);
-                }
 
+                    dataText = dataText + table.GetScript(ScriptSqliteHelper.InsertCountyValue, 3);
+                }
             }
+
+            FileHelper.WriteFileInFolderLogFileTableDatabase("County_New.txt", dataText);
         }
 
         private static void RunIcd()
         {
+            var dataText = "";
             using (var mysqlProvider = new MySqlDataProvider(_connectionString))
             {
                 string script, strScriptSqlite;
@@ -192,6 +206,8 @@ namespace CreateFile.GendataDefault
                         strScriptSqlite = ScriptSqliteHelper.InsertIcdSchedule + table.GetScript(ScriptSqliteHelper.InsertIcdValue, 3);
                         GenerateScriptHelper.SaveSqliteDb(strScriptSqlite, _saveTo);
                         _skip += Take;
+
+                        dataText = dataText + table.GetScript(ScriptSqliteHelper.InsertIcdValue, 3);
                     }
                 }
                 else
@@ -201,13 +217,17 @@ namespace CreateFile.GendataDefault
                     GenerateScriptHelper.SaveSqliteDb(ScriptSqliteHelper.TableIcd, _saveTo);
                     strScriptSqlite = ScriptSqliteHelper.InsertIcdSchedule + table.GetScript(ScriptSqliteHelper.InsertIcdValue, 3);
                     GenerateScriptHelper.SaveSqliteDb(strScriptSqlite, _saveTo);
-                }
 
+                    dataText = dataText + table.GetScript(ScriptSqliteHelper.InsertIcdValue, 3);
+                }
             }
+
+            FileHelper.WriteFileInFolderLogFileTableDatabase("Icd_New.txt", dataText);
         }
 
         private static void RunNpi()
         {
+            var dataText = "";
             using (var mysqlProvider = new MySqlDataProvider(_connectionString))
             {
                 string script, strScriptSqlite;
@@ -224,6 +244,8 @@ namespace CreateFile.GendataDefault
                         strScriptSqlite = ScriptSqliteHelper.InsertPhysicanNpiSchedule + table.GetScript(ScriptSqliteHelper.InsertPhysicanNpiValue, 17);
                         GenerateScriptHelper.SaveSqliteDb(strScriptSqlite, _saveTo);
                         _skip += Take;
+
+                        dataText = dataText + table.GetScript(ScriptSqliteHelper.InsertPhysicanNpiValue, 17);
                     }
                 }
                 else
@@ -233,13 +255,17 @@ namespace CreateFile.GendataDefault
                     GenerateScriptHelper.SaveSqliteDb(ScriptSqliteHelper.TablePhysicanNpi, _saveTo);
                     strScriptSqlite = ScriptSqliteHelper.InsertPhysicanNpiSchedule + table.GetScript(ScriptSqliteHelper.InsertPhysicanNpiValue, 17);
                     GenerateScriptHelper.SaveSqliteDb(strScriptSqlite, _saveTo);
-                }
 
+                    dataText = dataText + table.GetScript(ScriptSqliteHelper.InsertPhysicanNpiValue, 17);
+                }
             }
+
+            FileHelper.WriteFileInFolderLogFileTableDatabase("Npi_New.txt", dataText);
         }
 
         private static void RunRoute()
         {
+            var dataText = "";
             using (var mysqlProvider = new MySqlDataProvider(_connectionString))
             {
                 string script, strScriptSqlite;
@@ -248,6 +274,7 @@ namespace CreateFile.GendataDefault
                 _skip = 0;
                 if (total > Take)
                 {
+
                     while (_skip < total)
                     {
                         script = string.Format(ScriptMySqlHelper.TableRoute, _skip, Take);
@@ -256,6 +283,8 @@ namespace CreateFile.GendataDefault
                         strScriptSqlite = ScriptSqliteHelper.InsertRouteSchedule + table.GetScript(ScriptSqliteHelper.InsertRouteValue, 3);
                         GenerateScriptHelper.SaveSqliteDb(strScriptSqlite, _saveTo);
                         _skip += Take;
+
+                        dataText = dataText + table.GetScript(ScriptSqliteHelper.InsertRouteValue, 3);
                     }
                 }
                 else
@@ -265,13 +294,18 @@ namespace CreateFile.GendataDefault
                     GenerateScriptHelper.SaveSqliteDb(ScriptSqliteHelper.TableRoute, _saveTo);
                     strScriptSqlite = ScriptSqliteHelper.InsertRouteSchedule + table.GetScript(ScriptSqliteHelper.InsertRouteValue, 3);
                     GenerateScriptHelper.SaveSqliteDb(strScriptSqlite, _saveTo);
+
+                    dataText = dataText + table.GetScript(ScriptSqliteHelper.InsertRouteValue, 3);
                 }
 
             }
+
+            FileHelper.WriteFileInFolderLogFileTableDatabase("Route_New.txt", dataText);
         }
 
         private static void RunFrequency()
         {
+            var dataText = "";
             using (var mysqlProvider = new MySqlDataProvider(_connectionString))
             {
                 string script, strScriptSqlite;
@@ -288,6 +322,8 @@ namespace CreateFile.GendataDefault
                         strScriptSqlite = ScriptSqliteHelper.InsertFrequencySchedule + table.GetScript(ScriptSqliteHelper.InsertFrequencyValue, 3);
                         GenerateScriptHelper.SaveSqliteDb(strScriptSqlite, _saveTo);
                         _skip += Take;
+
+                        dataText = dataText + table.GetScript(ScriptSqliteHelper.InsertFrequencyValue, 3);
                     }
                 }
                 else
@@ -297,13 +333,17 @@ namespace CreateFile.GendataDefault
                     GenerateScriptHelper.SaveSqliteDb(ScriptSqliteHelper.TableFrequency, _saveTo);
                     strScriptSqlite = ScriptSqliteHelper.InsertFrequencySchedule + table.GetScript(ScriptSqliteHelper.InsertFrequencyValue, 3);
                     GenerateScriptHelper.SaveSqliteDb(strScriptSqlite, _saveTo);
-                }
 
+                    dataText = dataText + table.GetScript(ScriptSqliteHelper.InsertFrequencyValue, 3);
+                }
             }
+
+            FileHelper.WriteFileInFolderLogFileTableDatabase("Frequency_New.txt", dataText);
         }
 
         private static void RunSection()
         {
+            var dataText = "";
             using (var mysqlProvider = new MySqlDataProvider(_connectionString))
             {
                 string script, strScriptSqlite;
@@ -320,6 +360,8 @@ namespace CreateFile.GendataDefault
                         strScriptSqlite = ScriptSqliteHelper.InsertSectionSchedule + table.GetScript(ScriptSqliteHelper.InsertSectionValue, 5);
                         GenerateScriptHelper.SaveSqliteDb(strScriptSqlite, _saveTo);
                         _skip += Take;
+
+                        dataText = dataText + table.GetScript(ScriptSqliteHelper.InsertSectionValue, 5);
                     }
                 }
                 else
@@ -329,13 +371,17 @@ namespace CreateFile.GendataDefault
                     GenerateScriptHelper.SaveSqliteDb(ScriptSqliteHelper.TableSection, _saveTo);
                     strScriptSqlite = ScriptSqliteHelper.InsertSectionSchedule + table.GetScript(ScriptSqliteHelper.InsertSectionValue, 5);
                     GenerateScriptHelper.SaveSqliteDb(strScriptSqlite, _saveTo);
-                }
 
+                    dataText = dataText + table.GetScript(ScriptSqliteHelper.InsertSectionValue, 5);
+                }
             }
+
+            FileHelper.WriteFileInFolderLogFileTableDatabase("Section_New.txt", dataText);
         }
 
         private static void RunSectionQuestion()
         {
+            var dataText = "";
             using (var mysqlProvider = new MySqlDataProvider(_connectionString))
             {
                 string script, strScriptSqlite;
@@ -352,6 +398,8 @@ namespace CreateFile.GendataDefault
                         strScriptSqlite = ScriptSqliteHelper.InsertSectionQuestionSchedule + table.GetScript(ScriptSqliteHelper.InsertSectionQuestionValue, 26);
                         GenerateScriptHelper.SaveSqliteDb(strScriptSqlite, _saveTo);
                         _skip += Take;
+
+                        dataText = dataText + table.GetScript(ScriptSqliteHelper.InsertSectionQuestionValue, 26);
                     }
                 }
                 else
@@ -361,14 +409,17 @@ namespace CreateFile.GendataDefault
                     GenerateScriptHelper.SaveSqliteDb(ScriptSqliteHelper.TableSectionQuestion, _saveTo);
                     strScriptSqlite = ScriptSqliteHelper.InsertSectionQuestionSchedule + table.GetScript(ScriptSqliteHelper.InsertSectionQuestionValue, 26);
                     GenerateScriptHelper.SaveSqliteDb(strScriptSqlite, _saveTo);
-                }
 
+                    dataText = dataText + table.GetScript(ScriptSqliteHelper.InsertSectionQuestionValue, 26);
+                }
             }
 
+            FileHelper.WriteFileInFolderLogFileTableDatabase("SectionQuestion_New.txt", dataText);
         }
 
         private static void RunProviderAgency()
         {
+            var dataText = "";
             using (var mysqlProvider = new MySqlDataProvider(_connectionString))
             {
                 string script, strScriptSqlite;
@@ -385,6 +436,8 @@ namespace CreateFile.GendataDefault
                         strScriptSqlite = ScriptSqliteHelper.InsertProviderAgencySchedule + table.GetScript(ScriptSqliteHelper.InsertProviderAgencyValue, 15);
                         GenerateScriptHelper.SaveSqliteDb(strScriptSqlite, _saveTo);
                         _skip += Take;
+
+                        dataText = dataText + table.GetScript(ScriptSqliteHelper.InsertProviderAgencyValue, 15);
                     }
                 }
                 else
@@ -394,14 +447,17 @@ namespace CreateFile.GendataDefault
                     GenerateScriptHelper.SaveSqliteDb(ScriptSqliteHelper.TableProviderAgency, _saveTo);
                     strScriptSqlite = ScriptSqliteHelper.InsertProviderAgencySchedule + table.GetScript(ScriptSqliteHelper.InsertProviderAgencyValue, 15);
                     GenerateScriptHelper.SaveSqliteDb(strScriptSqlite, _saveTo);
-                }
 
+                    dataText = dataText + table.GetScript(ScriptSqliteHelper.InsertProviderAgencyValue, 15);
+                }
             }
 
+            FileHelper.WriteFileInFolderLogFileTableDatabase("ProviderAgency_New.txt", dataText);
         }
 
         private static void RunProviderMpi()
         {
+            var dataText = "";
             using (var mysqlProvider = new MySqlDataProvider(_connectionString))
             {
                 string script, strScriptSqlite;
@@ -418,6 +474,8 @@ namespace CreateFile.GendataDefault
                         strScriptSqlite = ScriptSqliteHelper.InsertProviderMpiSchedule + table.GetScript(ScriptSqliteHelper.InsertProviderMpiValue, 15);
                         GenerateScriptHelper.SaveSqliteDb(strScriptSqlite, _saveTo);
                         _skip += Take;
+
+                        dataText = dataText + table.GetScript(ScriptSqliteHelper.InsertProviderMpiValue, 15);
                     }
                 }
                 else
@@ -427,10 +485,13 @@ namespace CreateFile.GendataDefault
                     GenerateScriptHelper.SaveSqliteDb(ScriptSqliteHelper.TableProviderMpi, _saveTo);
                     strScriptSqlite = ScriptSqliteHelper.InsertProviderMpiSchedule + table.GetScript(ScriptSqliteHelper.InsertProviderMpiValue, 15);
                     GenerateScriptHelper.SaveSqliteDb(strScriptSqlite, _saveTo);
+
+                    dataText = dataText + table.GetScript(ScriptSqliteHelper.InsertProviderMpiValue, 15);
                 }
 
             }
 
+            FileHelper.WriteFileInFolderLogFileTableDatabase("ProviderMpi_New.txt", dataText);
         }
         #endregion
     }
