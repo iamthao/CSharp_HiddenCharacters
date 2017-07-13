@@ -2,7 +2,7 @@
  * Created by Thao Nguyen on 07/13/2017.
  */
 import React, {Component} from 'react';
-import ReactDOM from 'react-dom';
+//import ReactDOM from 'react-dom';
 import './ZoomImage.css';
 
 class Thao extends Component {
@@ -23,7 +23,7 @@ class Thao extends Component {
             <div className="div-center">
                 <p>Thao Nguyen</p>
 
-                <p><img src="https://unsplash.it/458/354" height={height}/></p>
+                <p><img src="https://unsplash.it/458/354" height={height} alt="Test"/></p>
                 <p>
                     <button onClick={this.zoomPicIn.bind(this)}> +</button>
                     <button onClick={this.zoomPicOut.bind(this)}> -</button>

@@ -16,7 +16,7 @@ class App extends Component {
     }
 }
 //--------- zoom image -------------
-ReactDOM.render(<Thao />, document.getElementById('test'));
+// ReactDOM.render(<Thao />, document.getElementById('test'));
 
 
 export default App;

@@ -1,11 +1,11 @@
-import React, {Component} from 'react';
+import React from 'react';
 import './IncreamentNumber.css';/**
  * Created by Thao Nguyen on 07/13/2017.
  */
 
 
 //-------- IncreamentNumber ----
-class Tang extends Component {
+class Tang extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
