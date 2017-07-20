@@ -15,10 +15,13 @@ import {LinkContainer} from 'react-router-bootstrap';
 import Home from "./Home";
 import About from "./About";
 
+//--- install redux -----------
 import {Provider} from 'react-redux'
 import {createStore} from 'redux'
-import todoApp from './reducers/index'
-let store = createStore(todoApp);
+import rootReducer from './reducers/index'
+let store = createStore(rootReducer);
+//end redux --------------
+
 
 const IndexPage = () => <h2>Index Page</h2>
 
