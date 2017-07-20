@@ -5,30 +5,10 @@ import React, {Component} from 'react';
 import './App.css';
 
 
-var data = [{name: 'Jhon', age: 28, city: 'HO'}, {name: 'Onhj', age: 82, city: 'HN'}, {
-    name: 'Nohj',
-    age: 41,
-    city: 'IT'
-}]
+var data = [{name: 'Jhon', age: 28, city: 'HO'},
+    {name: 'Onhj', age: 82, city: 'HN'},
+    {name: 'Nohj',age: 41,city: 'IT'}]
 
-
-class TableRow extends Component {
-    render() {
-        /* the ES6 version of const data = this.props.data */
-        var obj = this.props.data;
-        /*
-         use map to perform the same function on
-         each element in the obj array
-         */
-        return (
-            <tr>
-                <td>{obj.name}</td>
-                <td>{obj.age}</td>
-                <td>{obj.city}</td>
-            </tr>
-        );
-    }
-}
 
 class Table extends Component {
     constructor(props) {
