@@ -14,6 +14,7 @@ import {
 import {LinkContainer} from 'react-router-bootstrap';
 import Home from "./Home";
 import About from "./About";
+import Todo2 from "./components/Todo2";
 
 //--- install redux -----------
 import {Provider} from 'react-redux'
@@ -46,6 +47,9 @@ const Layout = () => (
                             <LinkContainer to="/about">
                                 <NavItem eventKey={2}>To Do</NavItem>
                             </LinkContainer>
+                            <LinkContainer to="/todo2">
+                                <NavItem eventKey={3}>To Do 2</NavItem>
+                            </LinkContainer>
                         </Nav>
                     </Navbar.Collapse>
                 </Navbar>
@@ -54,6 +58,8 @@ const Layout = () => (
                     <Route exact path="/" component={IndexPage}/>
                     <Route path="/home" component={Home}/>
                     <Route path="/about" component={About}/>
+                    <Route path="/todo2" component={Todo2}/>
+
                 </div>
             </div>
         </Router>

@@ -13,6 +13,8 @@ const getVisibleTodos = (todos, filter) => {
             return todos.filter(t => t.completed)
         case 'SHOW_ACTIVE':
             return todos.filter(t => !t.completed)
+        default:
+            return todos;
     }
 }
 
@@ -32,7 +34,7 @@ const mapDispatchToProps = dispatch => {
 
 const VisibleTodoList = connect(
     mapStateToProps,
-    mapDispatchToProps
+   mapDispatchToProps
 )(TodoList)
 
 export default VisibleTodoList
