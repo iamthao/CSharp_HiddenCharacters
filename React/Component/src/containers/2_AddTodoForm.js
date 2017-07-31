@@ -5,17 +5,19 @@ import React from 'react';
 import {connect} from 'react-redux'
 import {addTodo} from '../actions/action_Todo2'
 
+import {FormControl,Col,FormGroup,Button} from 'react-bootstrap'
+
 
 let AddTodoForm = ({dispatch}) => {
     let input;
     return (
         <div >
-            <input type="text" placeholder="Todo..."  ref={node => {
+            <Col xs={8} md={8}><FormControl type="text" placeholder="Todo..."  ref={node => {
                 input = node
-            }}/>
+            }}/></Col>
             {' '}
 
-            <button onClick={e => {
+            <Button onClick={e => {
                 e.preventDefault()
                 if (!input.value.trim()) {
                     return
@@ -24,7 +26,7 @@ let AddTodoForm = ({dispatch}) => {
                 input.value = ''
             }}>
                 Add Todo
-            </button>
+            </Button>
         </div>
     )
 }
