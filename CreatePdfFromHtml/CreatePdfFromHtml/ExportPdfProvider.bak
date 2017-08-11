@@ -176,15 +176,15 @@ namespace CreatePdfFromHtml
             }
             finally
             {
-                if (File.Exists(_pathFooterTemp) && FileHelper.CheckAvailableFile(_pathFooterTemp))
+                if (File.Exists(_pathFooterTemp))
                 {
                     File.Delete(_pathFooterTemp);
                 }
-                if (File.Exists(_pathHeaderTemp) && FileHelper.CheckAvailableFile(_pathHeaderTemp))
+                if (File.Exists(_pathHeaderTemp))
                 {
                     File.Delete(_pathHeaderTemp);
                 }
-                if (File.Exists(_pathContentTemp) && FileHelper.CheckAvailableFile(_pathContentTemp))
+                if (File.Exists(_pathContentTemp))
                 {
                     File.Delete(_pathContentTemp);
                 }
@@ -243,17 +243,17 @@ namespace CreatePdfFromHtml
 
                     var pathHeaderTemp = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString().Replace("-", "") + ".html");
                     var headerHtml = WriteHtml(pathHeaderTemp, header)
-                        ? " --header-spacing 3 --header-html \"" + pathHeaderTemp.Replace("\\", "/") + " \""
+                        ? " --header-spacing 3 --header-html " + pathHeaderTemp.Replace("\\", "/") + " "
                         : "";
 
                     var pathFooterTemp = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString().Replace("-", "") + ".html");
                     var footerHtml = WriteHtml(pathFooterTemp, footer)
-                        ? " --footer-html \"" + pathFooterTemp.Replace("\\", "/") + " \""
+                        ? " --footer-html " + pathFooterTemp.Replace("\\", "/") + " "
                         : "";
 
                     var pathContentTemp = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString().Replace("-", "") + ".html");
                     var contentHtml = WriteHtml(pathContentTemp, item.Content)
-                        ? "\"" + pathContentTemp.Replace("\\", "/") + "\" "
+                        ? pathContentTemp.Replace("\\", "/") + " "
                         : "";
                     content += contentHtml + headerHtml + footerHtml;
                     listTemp.Add(pathHeaderTemp);
@@ -292,7 +292,7 @@ namespace CreatePdfFromHtml
                         foreach (var temp in listTemp)
                         {
 
-                            if (File.Exists(temp) && FileHelper.CheckAvailableFile(temp))
+                            if (File.Exists(temp))
                             {
                                 File.Delete(temp);
                             }

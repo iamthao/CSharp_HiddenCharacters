@@ -64,7 +64,7 @@ namespace CreatePdfFromHtml
             _url = result;
         }
 
-        private static void _handleHeaderBodyFooter(string path, string htmlContent, string htmlFooter, string htmlHeader, string pagesShowHeader = null, string pagesShowFooter = null)
+        private static void _handleHeaderBodyFooter(string path, string htmlContent, string htmlFooter, string htmlHeader, string pagesShowHeader = null, string pagesShowFooter = "page")
         {
             _pathTempSaveFile = path;
             var htmlDocumentHelper = new HtmlDocumentHelper(htmlContent);
@@ -179,8 +179,7 @@ namespace CreatePdfFromHtml
                                                 }
                                             </script>
                                              </head>
-                                            <body onload='subst()'><div >" + htmlFooter + "</div></body></html>";
-                // _footerContent = _footerContentFormat;
+                                             <body onload='subst()'><div id='footer'>" + htmlFooter + "</div></body></html>";
             }
             #endregion footer
             #region content
@@ -238,8 +237,8 @@ namespace CreatePdfFromHtml
         public static string ExportPdfWithHeaderFooter(string desPath, string content, string header, string footer, float? marginLeft = 23, float? marginRigth = 23,
             float? marginTop = 45, float? marginBottom = 25)
         {
-            var result = _exportToPath(desPath, content, !string.IsNullOrEmpty(footer) & !string.IsNullOrEmpty(footer.Trim()) ? footer : null,
-                !string.IsNullOrEmpty(header) && !string.IsNullOrEmpty(header.Trim()) ? header : null, marginLeft: marginLeft, marginRigth: marginRigth,
+            var result = _exportToPath(desPath, content, !string.IsNullOrEmpty(footer) & !string.IsNullOrEmpty(footer.Trim()) ? footer : null, 
+                !string.IsNullOrEmpty(header) && !string.IsNullOrEmpty(header.Trim()) ? header : null, marginLeft: marginLeft, marginRigth: marginRigth, 
                 marginTop: marginTop, marginBottom: marginBottom);
             return result;
         }
@@ -316,7 +315,23 @@ namespace CreatePdfFromHtml
                                         <html lang='en' xmlns='http://www.w3.org/1999/xhtml'>
                                         <head>
                                             <meta charset='utf-8' />
-                                            <title></title>                                            
+                                            <title></title>
+                                            <style>
+                                                html, body {
+                                                    padding: 0;
+                                                    margin: 0;
+                                                }
+
+                                                table {
+                                                    padding: 5px;
+                                                    font-family: Calibri;
+                                                    font-size: 14px;
+                                                }
+
+                                                h2, h3, p {
+                                                    margin: 5px 0;
+                                                }
+                                            </style>
                                             <script>
                                             function subst() {
                                             var vars={};
@@ -331,6 +346,7 @@ namespace CreatePdfFromHtml
                                             </script>
                                         </head>
                                         <body onload='subst()'>
+                                            istFooterPageSize
                                             <div style='float:right;font-size: 11px;'>Page <span style='font-weight: 900;' class='page'></span> of <span  style='font-weight: 900;' class='topage'></span></div>
                                         </body>
                                         </html>";

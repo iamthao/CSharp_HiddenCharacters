@@ -20,10 +20,10 @@ namespace CreatePdfFromHtml
             var start = DateTime.Now;
             Console.WriteLine(start.ToString("yyyy-MM-dd HH:mm:ss") +" Start");
 
-            var marginBottom = 45;
-            var marginTop = 45;
-            var marginLeft = 24;
-            var marginRight = 24;
+            var marginBottom = 20;//modify
+            var marginTop = 43;//modify 37
+            var marginLeft = 12;
+            var marginRight = 12;
 
             object data = GetDataForTemplate();
 
@@ -43,6 +43,7 @@ namespace CreatePdfFromHtml
             SystemPdfService.ExportPdfWithHeaderFooter(destPath, content, header, footer, marginTop: marginTop,
                 marginBottom: marginBottom, marginLeft: marginLeft, marginRigth: marginRight);
 
+            //SystemPdfService.ExportHtml(destPath, content);
             //-------------End--------
 
             //var listFile = new List<byte[]>();
@@ -75,17 +76,20 @@ namespace CreatePdfFromHtml
 
         private static object GetDataForTemplate()
         {
-           return new
+            return new
             {
                 img_logo1 = "http://libris-staging.caminois.com/Content/images/LibertyHealthcareLogo.png",
                 img_translationbox = "http://libris-staging.caminois.com/Content/images/translationbox.png",
-                member_mid =string.Concat(Enumerable.Repeat("_",12)),//"123-456-7890",
-                member_name = string.Concat(Enumerable.Repeat("_", 20)),//"Thao Nguyen",
-                member_address1 = string.Concat(Enumerable.Repeat("_", 20)),//"205 Nguyen Xi",
-                member_address2 = string.Concat(Enumerable.Repeat("_", 15)),//"Tang 9",
-                member_city = string.Concat(Enumerable.Repeat("_", 15)),//"HCM",
-                member_state = string.Concat(Enumerable.Repeat("_", 2)),//"TX",
-                member_zip = string.Concat(Enumerable.Repeat("_", 5)),//"77014",
+                member_mid = "123-456-7890",
+                member_name = "Thao Nguyen",
+                member_address1 = "205 Nguyen Xi",
+                member_address2 = "Tang 9",
+                member_city = "HCM",
+                member_state = "TX",
+                member_zip = "77014",
+                created_date = DateTime.Now.ToShortDateString(),
+                customer_support_specialist = "Thao Support",
+                document_number = "DOC00002"
             };
         }
 
