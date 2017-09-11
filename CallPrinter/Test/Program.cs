@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Management;
+using System.Runtime.InteropServices;
+using System.Text.RegularExpressions;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
+using ZetaLongPaths;
 
 
 namespace Test
@@ -13,12 +16,12 @@ namespace Test
     {
         static void Main(string[] args)
         {
-            var listFileByte = new List<byte[]>();
-            var listFile = new List<string> { @"D:\TestCallPdf\1.pdf", @"D:\TestCallPdf\2.pdf" };
+            //var listFileByte = new List<byte[]>();
+            //var listFile = new List<string> { @"D:\TestCallPdf\1.pdf", @"D:\TestCallPdf\2.pdf" };
 
-            string fileName = Guid.NewGuid().ToString().Replace("-", "") + ".pdf";
-            var pathResult = Path.Combine(@"D:\TestCallPdf\", fileName);
-            Merge(listFile, pathResult);
+            //string fileName = Guid.NewGuid().ToString().Replace("-", "") + ".pdf";
+            //var pathResult = Path.Combine(@"D:\TestCallPdf\", fileName);
+            //Merge(listFile, pathResult);
 
             //foreach (var item in listFile)
             //{
@@ -26,11 +29,11 @@ namespace Test
             //}
 
             //var bytesResult = MergePdf.CombineMultiplePdfsByByte(listFileByte);
-            
-            
-            //System.IO.File.WriteAllBytes(pathResult, bytesResult);
 
-            Console.WriteLine("Success!!!");
+
+            ZlpIOHelper.CopyFile(Path.Combine(@"D:\Idaho\Letter", "Unable to Process.pdf"), Path.Combine(@"D:\SorceCompany\Idaho\Development\Branches\Dev\LibrisWeb\Resources\PrepForms", "Configuration ManagementConfiguration ManagementConfiguration ManagementConfiguration ManagementConfiguration ManagementConfiguration ManagementConfiguration ManagementConfiguration ManagementConfigur.pdf"),true);
+          
+            Console.WriteLine("Success!!! ");
             Console.ReadKey();
         }
 
@@ -76,5 +79,7 @@ namespace Test
                 });
             }
         }
+
+        
     }
 }

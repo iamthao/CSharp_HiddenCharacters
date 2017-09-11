@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HiddenCharacters", "HiddenCharacters\HiddenCharacters.csproj", "{3CD7D8E0-6292-46A5-856E-64B4C077071E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3CD7D8E0-6292-46A5-856E-64B4C077071E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3CD7D8E0-6292-46A5-856E-64B4C077071E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3CD7D8E0-6292-46A5-856E-64B4C077071E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3CD7D8E0-6292-46A5-856E-64B4C077071E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
