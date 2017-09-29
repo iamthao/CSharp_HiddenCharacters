@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ProjectInfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.sonarsource.com/msbuild/integration/2015/1">
+  <ProjectName>CreateService</ProjectName>
+  <ProjectLanguage>C#</ProjectLanguage>
+  <ProjectType>Product</ProjectType>
+  <ProjectGuid>4fe4acbd-ed9a-4d2f-9e3a-8ac7f631e3b9</ProjectGuid>
+  <FullPath>D:\GithubSvn\GitHub\TestCommitGithub\ImportDataExcel\CreateService\CreateService.csproj</FullPath>
+  <IsExcluded>false</IsExcluded>
+  <AnalysisResults>
+    <AnalysisResult Id="FilesToAnalyze" Location="D:\GithubSvn\GitHub\TestCommitGithub\ImportDataExcel\.sonarqube\out\\CreateService_0334\FilesToAnalyze.txt" />
+  </AnalysisResults>
+  <AnalysisSettings>
+    <Property Name="sonar.cs.roslyn.reportFilePath">D:\GithubSvn\GitHub\TestCommitGithub\ImportDataExcel\CreateService\bin\Debug\CreateService.exe.RoslynCA.json</Property>
+    <Property Name="sonar.cs.analyzer.projectOutPath">D:\GithubSvn\GitHub\TestCommitGithub\ImportDataExcel\.sonarqube\out\\CreateService_0334</Property>
+    <Property Name="sonar.stylecop.projectFilePath">D:\GithubSvn\GitHub\TestCommitGithub\ImportDataExcel\CreateService\CreateService.csproj</Property>
+  </AnalysisSettings>
+</ProjectInfo>

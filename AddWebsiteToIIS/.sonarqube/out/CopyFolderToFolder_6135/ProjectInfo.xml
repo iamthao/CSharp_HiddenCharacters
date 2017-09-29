@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ProjectInfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.sonarsource.com/msbuild/integration/2015/1">
+  <ProjectName>CopyFolderToFolder</ProjectName>
+  <ProjectLanguage>C#</ProjectLanguage>
+  <ProjectType>Product</ProjectType>
+  <ProjectGuid>94bc39eb-75dd-4dba-8bda-ca617a1a4bd7</ProjectGuid>
+  <FullPath>D:\GithubSvn\GitHub\TestCommitGithub\AddWebsiteToIIS\CopyFolderToFolder\CopyFolderToFolder.csproj</FullPath>
+  <IsExcluded>false</IsExcluded>
+  <AnalysisResults>
+    <AnalysisResult Id="FilesToAnalyze" Location="D:\GithubSvn\GitHub\TestCommitGithub\AddWebsiteToIIS\.sonarqube\out\\CopyFolderToFolder_6135\FilesToAnalyze.txt" />
+  </AnalysisResults>
+  <AnalysisSettings>
+    <Property Name="sonar.cs.roslyn.reportFilePath">D:\GithubSvn\GitHub\TestCommitGithub\AddWebsiteToIIS\CopyFolderToFolder\bin\Debug\CopyFolderToFolder.dll.RoslynCA.json</Property>
+    <Property Name="sonar.cs.analyzer.projectOutPath">D:\GithubSvn\GitHub\TestCommitGithub\AddWebsiteToIIS\.sonarqube\out\\CopyFolderToFolder_6135</Property>
+    <Property Name="sonar.stylecop.projectFilePath">D:\GithubSvn\GitHub\TestCommitGithub\AddWebsiteToIIS\CopyFolderToFolder\CopyFolderToFolder.csproj</Property>
+  </AnalysisSettings>
+</ProjectInfo>

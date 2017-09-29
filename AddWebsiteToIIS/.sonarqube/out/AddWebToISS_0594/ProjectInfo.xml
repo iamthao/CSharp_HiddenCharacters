@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ProjectInfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.sonarsource.com/msbuild/integration/2015/1">
+  <ProjectName>AddWebToISS</ProjectName>
+  <ProjectLanguage>C#</ProjectLanguage>
+  <ProjectType>Product</ProjectType>
+  <ProjectGuid>6d3c6284-4d80-48fb-afcf-9b36afcd70af</ProjectGuid>
+  <FullPath>D:\GithubSvn\GitHub\TestCommitGithub\AddWebsiteToIIS\AddWebToISS\AddWebToISS.csproj</FullPath>
+  <IsExcluded>false</IsExcluded>
+  <AnalysisResults>
+    <AnalysisResult Id="FilesToAnalyze" Location="D:\GithubSvn\GitHub\TestCommitGithub\AddWebsiteToIIS\.sonarqube\out\\AddWebToISS_0594\FilesToAnalyze.txt" />
+  </AnalysisResults>
+  <AnalysisSettings>
+    <Property Name="sonar.cs.roslyn.reportFilePath">D:\GithubSvn\GitHub\TestCommitGithub\AddWebsiteToIIS\AddWebToISS\bin\Debug\AddWebToISS.dll.RoslynCA.json</Property>
+    <Property Name="sonar.cs.analyzer.projectOutPath">D:\GithubSvn\GitHub\TestCommitGithub\AddWebsiteToIIS\.sonarqube\out\\AddWebToISS_0594</Property>
+    <Property Name="sonar.stylecop.projectFilePath">D:\GithubSvn\GitHub\TestCommitGithub\AddWebsiteToIIS\AddWebToISS\AddWebToISS.csproj</Property>
+  </AnalysisSettings>
+</ProjectInfo>

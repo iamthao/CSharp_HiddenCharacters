@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ProjectInfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.sonarsource.com/msbuild/integration/2015/1">
+  <ProjectName>ChangeDnsForm</ProjectName>
+  <ProjectLanguage>C#</ProjectLanguage>
+  <ProjectType>Product</ProjectType>
+  <ProjectGuid>fe83017b-37c0-423c-afe2-f3ad851ea1b6</ProjectGuid>
+  <FullPath>D:\GithubSvn\GitHub\TestCommitGithub\ImportDataExcel\ChangeDnsForm\ChangeDnsForm.csproj</FullPath>
+  <IsExcluded>false</IsExcluded>
+  <AnalysisResults>
+    <AnalysisResult Id="FilesToAnalyze" Location="D:\GithubSvn\GitHub\TestCommitGithub\ImportDataExcel\.sonarqube\out\\ChangeDnsForm_5025\FilesToAnalyze.txt" />
+  </AnalysisResults>
+  <AnalysisSettings>
+    <Property Name="sonar.cs.roslyn.reportFilePath">D:\GithubSvn\GitHub\TestCommitGithub\ImportDataExcel\ChangeDnsForm\bin\Debug\ChangeDnsForm.exe.RoslynCA.json</Property>
+    <Property Name="sonar.cs.analyzer.projectOutPath">D:\GithubSvn\GitHub\TestCommitGithub\ImportDataExcel\.sonarqube\out\\ChangeDnsForm_5025</Property>
+    <Property Name="sonar.stylecop.projectFilePath">D:\GithubSvn\GitHub\TestCommitGithub\ImportDataExcel\ChangeDnsForm\ChangeDnsForm.csproj</Property>
+  </AnalysisSettings>
+</ProjectInfo>

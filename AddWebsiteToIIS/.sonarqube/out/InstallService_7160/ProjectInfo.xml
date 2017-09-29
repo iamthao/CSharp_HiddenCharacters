@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ProjectInfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.sonarsource.com/msbuild/integration/2015/1">
+  <ProjectName>InstallService</ProjectName>
+  <ProjectLanguage>C#</ProjectLanguage>
+  <ProjectType>Product</ProjectType>
+  <ProjectGuid>7e0cf4e5-c23e-48f7-944c-56c875cd5bc1</ProjectGuid>
+  <FullPath>D:\GithubSvn\GitHub\TestCommitGithub\AddWebsiteToIIS\InstallService\InstallService.csproj</FullPath>
+  <IsExcluded>false</IsExcluded>
+  <AnalysisResults>
+    <AnalysisResult Id="FilesToAnalyze" Location="D:\GithubSvn\GitHub\TestCommitGithub\AddWebsiteToIIS\.sonarqube\out\\InstallService_7160\FilesToAnalyze.txt" />
+  </AnalysisResults>
+  <AnalysisSettings>
+    <Property Name="sonar.cs.roslyn.reportFilePath">D:\GithubSvn\GitHub\TestCommitGithub\AddWebsiteToIIS\InstallService\bin\Debug\InstallService.dll.RoslynCA.json</Property>
+    <Property Name="sonar.cs.analyzer.projectOutPath">D:\GithubSvn\GitHub\TestCommitGithub\AddWebsiteToIIS\.sonarqube\out\\InstallService_7160</Property>
+    <Property Name="sonar.stylecop.projectFilePath">D:\GithubSvn\GitHub\TestCommitGithub\AddWebsiteToIIS\InstallService\InstallService.csproj</Property>
+  </AnalysisSettings>
+</ProjectInfo>

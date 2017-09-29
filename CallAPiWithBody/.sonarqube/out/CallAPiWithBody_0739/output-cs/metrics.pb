@@ -1,0 +1,4 @@
+œ
+OD:\GithubSvn\GitHub\TestCommitGithub\CallAPiWithBody\CallAPiWithBody\Program.cs/ ^(4048j@jHjR 0=0;5=0;10=0;20=0;30=0;60=0;90=1Z1=92;2=0;4=1;6=0;8=0;10=1;12=0j)*+kqstuwy{}ÄÇÑÜäãåçrá	!"#$%'-./0123456789:;<=>?@ABDEFGHIJKLMNPQRTUVWXYZ[\]^_`abcdefghijlmnoèëíìîïñòôöõúùû†°¢£§•¶ß®©™´¨≠ÆØ∞±≤≥¥µ∑∏π∫ªºΩæø¿¡√ƒ≈∆«»… ÀÕŒœ–—“”‘’÷◊ÿŸ⁄€‹›ﬁ‡·‚„‰ÂÊÁËxƒ
+_D:\GithubSvn\GitHub\TestCommitGithub\CallAPiWithBody\CallAPiWithBody\Properties\AssemblyInfo.csR 0=1;5=0;10=0;20=0;30=0;60=0;90=0Z1=0;2=0;4=0;6=0;8=0;10=0;12=0j !"r	
+#$
